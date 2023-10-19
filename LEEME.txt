@@ -1,0 +1,2 @@
+Esta es la rama de desarrollo "dev"
+Versión estable Alpha v1.0
