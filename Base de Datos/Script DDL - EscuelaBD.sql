@@ -46,7 +46,7 @@ create table Empleados(
     NombresEmpleado varchar(60) not null,
     ApellidosEmpleado varchar(60) not null,
     FechaNacEmpleado date not null,
-    Telefono varchar(10) not null,
+    TelefonoEmpleado varchar(10) not null,
     Correo varchar(100),
     ID_Cargo int not null,
     ID_Direccion int not null   
@@ -121,6 +121,7 @@ create table Encargados(
 	ID_Encargado int primary key identity(1, 1),
 	NombresEncargado varchar(60) not null,
 	ApellidosEncargado varchar(60) not null,
+	TelefonoEncargado varchar(10),
 	DUI_Encargado varchar(10) not null,
 	ID_Direccion int not null
 );
@@ -131,6 +132,7 @@ create table Estudiantes(
     ApellidosEstudiante varchar(60) not null,
     FechaNacEstudiante date not null,
     GeneroEstudiante char(1),
+	TelefonoEstudiante varchar(10),
     ID_Encargado int not null,
     ID_Direccion int not null
 );

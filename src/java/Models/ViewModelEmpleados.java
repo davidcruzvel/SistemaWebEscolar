@@ -106,8 +106,13 @@ public class ViewModelEmpleados {
     public void setFechaNacEmpleado(Date fechaNacEmpleado) {
         this.fechaNacEmpleado = fechaNacEmpleado;
     }
+<<<<<<< HEAD
 
     /**
+=======
+    
+/**
+>>>>>>> dev
      * @return the telefonoEmpleado
      */
     public String getTelefonoEmpleado() {
