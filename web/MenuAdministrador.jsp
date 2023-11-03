@@ -16,9 +16,6 @@
             <ul>
                 <li><a href="/SistemaWebEscolar">Inicio Sistema Escuela</a></li>
                 <li><a href="/SistemaWebEscolar?accion=Login">Login</a></li>
-<<<<<<< HEAD
-                <li><a href="/SistemaWebEscolar?accion=GestionarEmpleados">GestionarEmpleados</a></li>
-=======
                 <li><a href="/SistemaWebEscolar?accion=GestionarCargos">Gestionar Cargos</a></li>
                 <li><a href="/SistemaWebEscolar?accion=GestionarEmpleados">Gestionar Empleados</a></li>
                 <li><a href="/SistemaWebEscolar?accion=GestionarUsuarios">Gestionar Usuarios</a></li>
@@ -30,7 +27,6 @@
                 <li><a href="/SistemaWebEscolar?accion=GestionarMatriculas">Gestionar Matriculas</a></li>
                 <li><a href="/SistemaWebEscolar?accion=GestionarMaterias">Gestionar Materias</a></li>
                 <li><a href="/SistemaWebEscolar?accion=GestionarCalificaciones">Gestionar Calificaciones</a></li>
->>>>>>> dev
             </ul>
         </nav>
     </body>

@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class ViewModelEmpleados {
 
+    //Atributos de la tabla Empleados
     private int ID_Empleado;
     private String DUI_Empleado;
     private int ISSS_Empleado;
@@ -22,7 +23,8 @@ public class ViewModelEmpleados {
     private String correo;
     private int ID_Cargo;
     private int ID_Direccion;
-
+    
+    //Metodos de la clase ViewModelEmpleados
     /**
      * @return the ID_Empleado
      */
@@ -106,13 +108,8 @@ public class ViewModelEmpleados {
     public void setFechaNacEmpleado(Date fechaNacEmpleado) {
         this.fechaNacEmpleado = fechaNacEmpleado;
     }
-<<<<<<< HEAD
-
-    /**
-=======
     
 /**
->>>>>>> dev
      * @return the telefonoEmpleado
      */
     public String getTelefonoEmpleado() {
@@ -168,3 +165,10 @@ public class ViewModelEmpleados {
         this.ID_Direccion = ID_Direccion;
     }
 }
+
+
+    
+
+    
+
+
