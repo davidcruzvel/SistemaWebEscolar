@@ -261,11 +261,11 @@ public class ServletPrincipal extends HttpServlet {
                 ArrayList<ViewModelEncargados> listaEncargados = new ArrayList<>();
                 while (rs.next()) {
                     ViewModelEncargados encargado = new ViewModelEncargados();
-                    encargado.setID_Encargado(rs.getInt("ID_Empleado"));
+                    encargado.setID_Encargado(rs.getInt("ID_Encargado"));
                     encargado.setNombresEncargado(rs.getString("nombresEncargado"));
                     encargado.setApellidosEncargado(rs.getString("apellidosEncargado"));
                     encargado.setTelefonoEncargado(rs.getString("telefonoEncargado"));
-                    encargado.setDUI_Encargado(rs.getInt("DUI_Encargado"));
+                    encargado.setDUI_Encargado(rs.getString("DUI_Encargado"));
                     encargado.setID_Direccion(rs.getInt("ID_Direccion"));
                     listaEncargados.add(encargado);
                 }
@@ -448,7 +448,10 @@ public class ServletPrincipal extends HttpServlet {
         }else if (accion.equals("GestionarMaterias")) {
             mostrarMaterias(request, response);
             request.getRequestDispatcher("/GestionarMaterias.jsp").forward(request, response);
-        } 
+        }else if (accion.equals("GestionarCalificaciones")) {
+            mostrarCalificaciones(request, response);
+            request.getRequestDispatcher("/GestionarCalificaciones.jsp").forward(request, response);
+        }  
     }
 
     /**

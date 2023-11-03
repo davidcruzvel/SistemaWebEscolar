@@ -35,7 +35,7 @@
                     <tr>
                         <td><c:out value="${item.ID_Encargado}" /></td>
                         <td><c:out value="${item.nombresEncargado}" /></td>
-                        <td><c:out value="${item.apellidosEncarcado}" /></td>                        
+                        <td><c:out value="${item.apellidosEncargado}" /></td>                        
                         <td><c:out value="${item.telefonoEncargado}" /></td>
                         <td><c:out value="${item.DUI_Encargado}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>

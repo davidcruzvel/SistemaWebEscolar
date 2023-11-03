@@ -14,7 +14,7 @@ public class ViewModelEncargados {
     private String nombresEncargado;
     private String apellidosEncargado;
     private String telefonoEncargado;
-    private int DUI_Encargado;
+    private String DUI_Encargado;
     private int ID_Direccion;
 
     /**
@@ -76,14 +76,14 @@ public class ViewModelEncargados {
     /**
      * @return the DUI_Encargado
      */
-    public int getDUI_Encargado() {
+    public String getDUI_Encargado() {
         return DUI_Encargado;
     }
 
     /**
      * @param DUI_Encargado the DUI_Encargado to set
      */
-    public void setDUI_Encargado(int DUI_Encargado) {
+    public void setDUI_Encargado(String DUI_Encargado) {
         this.DUI_Encargado = DUI_Encargado;
     }
 

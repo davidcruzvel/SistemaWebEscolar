@@ -14,18 +14,19 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/SistemaWeb">Inicio Sistema Escuela</a></li>
-                <li><a href="/SistemaWeb?accion=Login">Login</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarCargos">Gestionar Cargos</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarEmpleados">Gestionar Empleados</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarUsuarios">Gestionar Usuarios</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarDocentes">Gestionar Docentes</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarGrupos">Gestionar Grupos</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarEncargados">Gestionar Encargados</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarEstudiantes">Gestionar Estudiantes</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarMatriculas">Gestionar Matriculas</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarMaterias">Gestionar Materias</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarCalificaciones">Gestionar Calificaciones</a></li>
+                <li><a href="/SistemaWebEscolar">Inicio Sistema Escuela</a></li>
+                <li><a href="/SistemaWebEscolar?accion=Login">Login</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarCargos">Gestionar Cargos</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarEmpleados">Gestionar Empleados</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarUsuarios">Gestionar Usuarios</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarEspecialidades">Gestionar Especialidades</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarDocentes">Gestionar Docentes</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarGrupos">Gestionar Grupos</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarEncargados">Gestionar Encargados</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarEstudiantes">Gestionar Estudiantes</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarMatriculas">Gestionar Matriculas</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarMaterias">Gestionar Materias</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarCalificaciones">Gestionar Calificaciones</a></li>
             </ul>
         </nav>
     </body>
