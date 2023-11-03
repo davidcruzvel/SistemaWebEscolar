@@ -14,9 +14,9 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/SistemaWeb">Inicio Sistema Escuela</a></li>
-                <li><a href="/SistemaWeb?accion=Login">Login</a></li>
-                <li><a href="/SistemaWeb?accion=GestionarEmpleados">GestionarEmpleados</a></li>
+                <li><a href="/SistemaWebEscolar">Inicio Sistema Escuela</a></li>
+                <li><a href="/SistemaWebEscolar?accion=Login">Login</a></li>
+                <li><a href="/SistemaWebEscolar?accion=GestionarEmpleados">GestionarEmpleados</a></li>
             </ul>
         </nav>
     </body>
