@@ -87,7 +87,7 @@ public class ServletPrincipal extends HttpServlet {
                     empleado.setNombresEmpleado(rs.getString("nombresEmpleado"));
                     empleado.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
                     empleado.setFechaNacEmpleado(rs.getDate("fechaNacEmpleado"));
-                    empleado.setTelefono(rs.getString("telefono"));
+                    empleado.setTelefonoEmpleado(rs.getString("telefonoEmpleado"));
                     empleado.setCorreo(rs.getString("correo"));
                     empleado.setID_Cargo(rs.getInt("ID_Cargo"));
                     empleado.setID_Direccion(rs.getInt("ID_Direccion"));

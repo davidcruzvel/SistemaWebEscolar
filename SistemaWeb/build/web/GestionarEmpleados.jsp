@@ -43,7 +43,7 @@
                         <td><c:out value="${item.nombresEmpleado}" /></td>
                         <td><c:out value="${item.apellidosEmpleado}" /></td>
                         <td><c:out value="${item.fechaNacEmpleado}" /></td>
-                        <td><c:out value="${item.telefono}" /></td>
+                        <td><c:out value="${item.telefonoEmpleado}" /></td>
                         <td><c:out value="${item.correo}" /></td>                        
                         <td><c:out value="${item.ID_Cargo}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
