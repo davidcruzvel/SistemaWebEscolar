@@ -539,26 +539,26 @@ select * from Grupos;
 -- Encargados
 go
 insert into Encargados values
---  NombresEncargado, ApellidosEncargado, DUI_Encargado, ID_Direccion
-	('Juan Antonio', 'Martinez Saavedra', '07654321-3', '5'),
-	('Maria del Carmen', 'Rodriguez de Torres', '06789012-7', '6'),
-	('Ana Laura', 'Gonzalez Fernandez', '02345678-4', '7'),
-	('Jose David', 'Perez Torres', '08901234-2', '8'),
-	('Laura Helena', 'Diaz de Nochez', '05432109-5', '9'),
-	('Carlos Andres', 'Ramirez Martinez', '02109876-6', '10');
+--  NombresEncargado, ApellidosEncargado, Telefono, DUI_Encargado, ID_Direccion
+	('Juan Antonio', 'Martinez Saavedra', '7998-9515', '07654321-3', '5'),
+	('Maria del Carmen', 'Rodriguez de Torres', '6598-1545', '06789012-7', '6'),
+	('Ana Laura', 'Gonzalez Fernandez', '6933-2145', '02345678-4', '7'),
+	('Jose David', 'Perez Torres', '7553-1545', '08901234-2', '8'),
+	('Laura Helena', 'Diaz de Nochez', '7415-3265', '05432109-5', '9'),
+	('Carlos Andres', 'Ramirez Martinez', '7994-0023', '02109876-6', '10');
 go
 select * from Encargados;
 
 go
 -- Estudiantes
 insert into Estudiantes values
--- NIE, NombresEstudiante, ApellidosEstudiante, FechaNacEstudiante, Genero, ID_Encargado, ID_Direccion
-	('147258369', 'Juan Carlos', 'Martinez Gonzalez', '01-01-2007', 'M', '1', '5'),
-	('123159147', 'Juana Gabriela', 'Ramirez Consuelo', '02-02-2007', 'F', '2', '6'),
-	('159126456', 'Gabriel Alexander', 'Valle Recinos', '03-03-2007', 'M', '3', '7'),
-	('188256254', 'Alex Edgardo', 'Jimenez Portillo', '04-04-2006', 'M', '4', '8'),
-	('136752358', 'William Eduardo', 'Calderon Perez', '05-05-2006', 'M', '5', '9'),
-	('102365849', 'Esperanza Beatriz', 'Madrid Aguirre', '06-06-2006', 'F', '6', '10');
+-- NIE, NombresEstudiante, ApellidosEstudiante, FechaNacEstudiante, Genero, Telefono, ID_Encargado, ID_Direccion
+	('147258369', 'Juan Carlos', 'Martinez Gonzalez', '01-01-2007', 'M', '7615-3222', '1', '5'),
+	('123159147', 'Juana Gabriela', 'Ramirez Consuelo', '02-02-2007', 'F', '7664-1023', '2', '6'),
+	('159126456', 'Gabriel Alexander', 'Valle Recinos', '03-03-2007', 'M', '7995-0215', '3', '7'),
+	('188256254', 'Alex Edgardo', 'Jimenez Portillo', '04-04-2006', 'M', '6451-0344', '4', '8'),
+	('136752358', 'William Eduardo', 'Calderon Perez', '05-05-2006', 'M', '6805-0551', '5', '9'),
+	('102365849', 'Esperanza Beatriz', 'Madrid Aguirre', '06-06-2006', 'F', '7954-3033', '6', '10');
 go
 select * from Estudiantes;
 

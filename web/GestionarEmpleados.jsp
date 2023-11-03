@@ -22,16 +22,16 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>ID_Empleado</th>
-                    <th>DUI_Empleado</th>
-                    <th>ISSS_Empleado</th>
-                    <th>NombresEmpleado</th>
-                    <th>ApellidosEmpleado</th>
-                    <th>FechaNacEmpleado</th>
-                    <th>Telefono</th>
+                    <th>ID Empleado</th>
+                    <th>DUI</th>
+                    <th>ISSS</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>ID_Cargo</th>
-                    <th>ID_Direccion</th>
+                    <th>ID Cargo</th>
+                    <th>ID Direccion</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                         <td><c:out value="${item.nombresEmpleado}" /></td>
                         <td><c:out value="${item.apellidosEmpleado}" /></td>
                         <td><c:out value="${item.fechaNacEmpleado}" /></td>
-                        <td><c:out value="${item.telefono}" /></td>
+                        <td><c:out value="${item.telefonoEmpleado}" /></td>
                         <td><c:out value="${item.correo}" /></td>                        
                         <td><c:out value="${item.ID_Cargo}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
