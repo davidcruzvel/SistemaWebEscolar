@@ -16,7 +16,7 @@
     <title>Login Sistema Escolar</title>
 
     <body>
-        <form method="POST" action="/SistemaWeb/ServletPrincipal?accion=Login" id="formLogin">
+        <form method="POST" action="/SistemaWebEscolar/ServletPrincipal?accion=Login" id="formLogin">
             <div id="resultLogin"></div>    
             <div><h1>Sistema Escolar 1.0</h1></div>           
             <%-- Crear objeto de la clase Date y formatear la fecha --%>

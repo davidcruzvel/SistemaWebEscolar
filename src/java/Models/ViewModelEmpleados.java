@@ -19,7 +19,7 @@ public class ViewModelEmpleados {
     private String nombresEmpleado;
     private String apellidosEmpleado;
     private Date fechaNacEmpleado;
-    private String telefono;
+    private String telefonoEmpleado;
     private String correo;
     private int ID_Cargo;
     private int ID_Direccion;
@@ -108,19 +108,19 @@ public class ViewModelEmpleados {
     public void setFechaNacEmpleado(Date fechaNacEmpleado) {
         this.fechaNacEmpleado = fechaNacEmpleado;
     }
-
-    /**
-     * @return the telefono
+    
+/**
+     * @return the telefonoEmpleado
      */
-    public String getTelefono() {
-        return telefono;
+    public String getTelefonoEmpleado() {
+        return telefonoEmpleado;
     }
 
     /**
-     * @param telefono the telefono to set
+     * @param telefonoEmpleado the telefonoEmpleado to set
      */
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefonoEmpleado(String telefonoEmpleado) {
+        this.telefonoEmpleado = telefonoEmpleado;
     }
 
     /**
