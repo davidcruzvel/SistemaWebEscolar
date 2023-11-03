@@ -31,7 +31,7 @@
                     <th>Teléfono</th>
                     <th>Correo</th>
                     <th>ID Cargo</th>
-                    <th>ID Direccion</th>
+                    <th>ID Dirección</th>
                 </tr>
             </thead>
             <tbody>

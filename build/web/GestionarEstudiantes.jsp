@@ -28,7 +28,7 @@
                     <th>Género</th>
                     <th>Teléfono</th>
                     <th>ID Encargado</th>
-                    <th>ID Direccion</th>
+                    <th>ID Dirección</th>
                 </tr>
             </thead>
             <tbody>
