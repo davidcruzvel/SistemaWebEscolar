@@ -56,7 +56,7 @@
 
                         <!-- AÑADIR OPCIONES DE MODIFICACION Y ELIMINACION -->
                         <td>
-                            <form action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp" method="post">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />
                                 <input type="hidden" name="ISSS_Empleado" value="${item.ISSS_Empleado}" />
@@ -69,7 +69,7 @@
                                 <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
                                 <input type="submit" value="Modificar" />
                             </form>    
-                            <form action="/SistemaWebEscolar/OpcionesUsuario/EliminarEmpleado.jsp" method="post">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />
                                 <input type="hidden" name="ISSS_Empleado" value="${item.ISSS_Empleado}" />
