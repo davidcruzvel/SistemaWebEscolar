@@ -449,7 +449,7 @@ public class ServletPrincipal extends HttpServlet {
         String correo = request.getParameter("correo");
         String ID_Cargo = request.getParameter("ID_Cargo");
         String ID_Direccion = request.getParameter("ID_Direccion");
-        
+
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             try (Connection conn = DriverManager.getConnection(url)) {
@@ -467,8 +467,6 @@ public class ServletPrincipal extends HttpServlet {
                  + "ID_Direccion='"+ID_Direccion+"' " 
                  + "where ID_Empleado='"+ID_Empleado+"'";
                 
-                //String sql = "update Empleados set DUI_Empleado='" + DUI_Empleado + "', ISSS_Empleado='" + ISSS_Empleado + "', NombresEmpleado='" + nombresEmpleado + "', ApellidosEmpleado='" + apellidosEmpleado + "',  FechaNacEmpleado='" + fechaNacEmpleado + "', TelefonoEmpleado='" + telefonoEmpleado + "', Correo='" + correo + "', ID_Cargo='" + ID_Cargo + "', ID_Direccion='" + ID_Direccion + "' where ID_Empleado='" + ID_Empleado + "'";
-
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 int registros = pstmt.executeUpdate();
                 if (registros > 0) {
@@ -611,9 +609,11 @@ public class ServletPrincipal extends HttpServlet {
             }
         }
 
-        //REDIRECCION POST
+        //CAPTURA DE DATOS ENVIADOS POR POST
         if (accion.equals("AgregarEmpleado")) {
+            //LOS DATOS SE LE PASAN POR PARAMETRO A LA FUNCION
             agregarEmpleado(request, response);
+            //REDIRIGE NUEVAMENTE A LA VISTA DE AGREGAR EMPLEADO
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEmpleado");
         } else if (accion.equals("ModificarEmpleado")) {
             modificarEmpleado(request, response);

@@ -17,7 +17,7 @@
         <form method="POST" action="/SistemaWebEscolar/ServletPrincipal?accion=ModificarEmpleado">
             <div>
                 <label>ID Empleado:</label>
-                <input type="text" name="ID_Empleado" id="ID_Empleado" value="${param.ID_Empleado}" readonly disabled /><br>
+                <input type="text" name="ID_Empleado" id="ID_Empleado" value="${param.ID_Empleado}" readonly /><br>
                 <label>DUI:</label>
                 <input type="text" name="DUI_Empleado" id="DUI_Empleado" value="${param.DUI_Empleado}" required /><br>
                 <label>Número de afiliado ISSS:</label>
