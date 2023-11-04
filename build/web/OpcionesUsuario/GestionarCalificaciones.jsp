@@ -18,7 +18,8 @@
         <h2>Listado de Calificaciones</h2>
         <br>
         <h3>Conexion: ${mensaje_conexion}</h3>
-
+        <br>
+        <br>
         <table border="1">
             <thead>
                 <tr>

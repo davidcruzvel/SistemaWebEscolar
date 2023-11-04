@@ -16,8 +16,10 @@
     <body>
         <h1>Gestión de Empleados</h1>
         <h2>Listado de Empleados</h2>
-        <br>
         <h3>Conexion: ${mensaje_conexion}</h3>
+
+        <!-- AÑADIR OPCION DE NUEVO REGISTRO -->
+        <a href="/SistemaWebEscolar?accion=AgregarEmpleado">Agregar empleado</a><br><br>
 
         <table border="1">
             <thead>
@@ -32,6 +34,10 @@
                     <th>Correo</th>
                     <th>ID Cargo</th>
                     <th>ID Dirección</th>
+
+                    <!-- AÑADIR COLUMNA DE ACCIONES-->
+                    <th>Acciones</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -47,9 +53,39 @@
                         <td><c:out value="${item.correo}" /></td>                        
                         <td><c:out value="${item.ID_Cargo}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
+
+                        <!-- AÑADIR OPCIONES DE MODIFICACION Y ELIMINACION -->
+                        <td>
+                            <form action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp" method="post">
+                                <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
+                                <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />
+                                <input type="hidden" name="ISSS_Empleado" value="${item.ISSS_Empleado}" />
+                                <input type="hidden" name="nombresEmpleado" value="${item.nombresEmpleado}" />
+                                <input type="hidden" name="apellidosEmpleado" value="${item.apellidosEmpleado}" />
+                                <input type="hidden" name="fechaNacEmpleado" value="${item.fechaNacEmpleado}" />
+                                <input type="hidden" name="telefonoEmpleado" value="${item.telefonoEmpleado}" />
+                                <input type="hidden" name="correo" value="${item.correo}" />
+                                <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
+                                <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
+                                <input type="submit" value="Modificar" />
+                            </form>    
+                            <form action="/SistemaWebEscolar/OpcionesUsuario/EliminarEmpleado.jsp" method="post">
+                                <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
+                                <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />
+                                <input type="hidden" name="ISSS_Empleado" value="${item.ISSS_Empleado}" />
+                                <input type="hidden" name="nombresEmpleado" value="${item.nombresEmpleado}" />
+                                <input type="hidden" name="apellidosEmpleado" value="${item.apellidosEmpleado}" />
+                                <input type="hidden" name="fechaNacEmpleado" value="${item.fechaNacEmpleado}" />
+                                <input type="hidden" name="telefonoEmpleado" value="${item.telefonoEmpleado}" />
+                                <input type="hidden" name="correo" value="${item.correo}" />
+                                <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
+                                <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
+                                <input type="submit" value="Eliminar" />
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>            
-        </table>
+        </table>      
     </body>
 </html>

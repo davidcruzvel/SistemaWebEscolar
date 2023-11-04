@@ -2,5 +2,9 @@
     "elements": {
         "fmt:formatdate": {}
     },
-    "attributes": {}
+    "attributes": {
+        "readonly": {
+            "context": "input"
+        }
+    }
 }
