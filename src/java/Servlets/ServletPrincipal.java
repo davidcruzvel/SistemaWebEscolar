@@ -435,7 +435,52 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
+    
+    public void agregarCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de las calificaciones es autoincrementable
+        String ID_Materia = request.getParameter("ID_Materia");
+        String nie = request.getParameter("nie");
+        String ID_Docente = request.getParameter("ID_Docente");
+        String examen1 = request.getParameter("examen1");
+        String examen2 = request.getParameter("examen2");
+        String examen3 = request.getParameter("examen3");
+        String examenFinal = request.getParameter("examenFinal");
+        String tareas = request.getParameter("tareas");
+        String promedio = request.getParameter("promedio");
+        String estado = request.getParameter("estado");
 
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Calificaciones values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, ID_Materia);
+                pstmt.setString(2, nie);
+                pstmt.setString(3, ID_Docente);
+                pstmt.setString(4, examen1);
+                pstmt.setString(5, examen2);
+                pstmt.setString(6, examen3);
+                pstmt.setString(7, examenFinal);
+                pstmt.setString(8, tareas);
+                pstmt.setString(9, promedio);
+                pstmt.setString(10, estado);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    
+    
     //Funciones de actualizacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
@@ -480,7 +525,55 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
+    
+    public void modificarCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Calificacion = request.getParameter("ID_Calificacion");
+        String ID_Materia = request.getParameter("ID_Materia");
+        String nie = request.getParameter("nie");
+        String ID_Docente = request.getParameter("ID_Docente");
+        String examen1 = request.getParameter("examen1");
+        String examen2 = request.getParameter("examen2");
+        String examen3 = request.getParameter("examen3");
+        String examenFinal = request.getParameter("examenFinal");
+        String tareas = request.getParameter("tareas");
+        String promedio = request.getParameter("promedio");
+        String estado = request.getParameter("estado");
 
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                
+                String sql = "update Calificaciones set "
+                 + "ID_Materia='"+ID_Materia+"', "
+                 + "nie='"+nie+"', "
+                 + "ID_Docente='"+ID_Docente+"', "
+                 + "examen1='"+examen1+"', "
+                 + "examen2='"+examen2+"', "
+                 + "examen3='"+examen3+"', "
+                 + "examenFinal='"+examenFinal+"', " 
+                 + "tareas='"+tareas+"', "
+                 + "promedio='"+promedio+"', " 
+                 + "estado='"+estado+"' " 
+                 + "where ID_Calificacion='"+ID_Calificacion+"'";
+                
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    
+    
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -502,7 +595,30 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
+    
+    public void eliminarCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Calificacion = request.getParameter("ID_Calificacion");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Calificaciones where ID_Calificacion='" + ID_Calificacion + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
 
+    
+    
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -556,14 +672,18 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("GestionarCalificaciones")) {
             mostrarCalificaciones(request, response);
             request.getRequestDispatcher("OpcionesUsuario/GestionarCalificaciones.jsp").forward(request, response);
-
-            //REDIRECCION PARA JSP DE AGREGAR
         } else if (accion.equals("AgregarEmpleado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
             request.getRequestDispatcher("OpcionesUsuario/AgregarEmpleado.jsp").forward(request, response);
+        } else if (accion.equals("AgregarCalificacion")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarCalificacion.jsp").forward(request, response);
         }
     }
 
@@ -611,9 +731,7 @@ public class ServletPrincipal extends HttpServlet {
 
         //CAPTURA DE DATOS ENVIADOS POR POST
         if (accion.equals("AgregarEmpleado")) {
-            //LOS DATOS SE LE PASAN POR PARAMETRO A LA FUNCION
             agregarEmpleado(request, response);
-            //REDIRIGE NUEVAMENTE A LA VISTA DE AGREGAR EMPLEADO
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEmpleado");
         } else if (accion.equals("ModificarEmpleado")) {
             modificarEmpleado(request, response);
@@ -621,6 +739,15 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("EliminarEmpleado")) {
             eliminarEmpleado(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEmpleados");
+        } else if (accion.equals("AgregarCalificacion")) {
+            agregarCalificacion(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarCalificacion");
+        } else if (accion.equals("ModificarCalificacion")) {
+            modificarCalificacion(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCalificaciones");
+        } else if (accion.equals("EliminarCalificacion")) {
+            eliminarCalificacion(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCalificaciones");
         }
     }
 

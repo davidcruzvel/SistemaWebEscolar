@@ -16,9 +16,8 @@
     <body>
         <h1>Gestión de Empleados</h1>
         <h2>Listado de Empleados</h2>
-        <h3>Conexion: ${mensaje_conexion}</h3>
+        <h3>Conexion: ${mensaje_conexion}</h3><br>
 
-        <!-- AÑADIR OPCION DE NUEVO REGISTRO -->
         <a href="/SistemaWebEscolar?accion=AgregarEmpleado">Agregar empleado</a><br><br>
 
         <table border="1">
@@ -34,10 +33,7 @@
                     <th>Correo</th>
                     <th>ID Cargo</th>
                     <th>ID Dirección</th>
-
-                    <!-- AÑADIR COLUMNA DE ACCIONES-->
                     <th>Acciones</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -53,8 +49,6 @@
                         <td><c:out value="${item.correo}" /></td>                        
                         <td><c:out value="${item.ID_Cargo}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
-
-                        <!-- AÑADIR OPCIONES DE MODIFICACION Y ELIMINACION -->
                         <td>
                             <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
