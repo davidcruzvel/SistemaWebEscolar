@@ -479,7 +479,30 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
-    
+    public void agregarCargo(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los cargos es autoincrementable
+        String cargo = request.getParameter("cargo");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Cargos values (?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, cargo);                
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
     
     //Funciones de actualizacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
@@ -572,7 +595,33 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
-    
+    public void modificarCargo(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Cargo = request.getParameter("ID_Cargo");
+        String cargo = request.getParameter("cargo");       
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                
+                String sql = "update Cargos set "
+                 + "cargo='"+cargo+"' "
+                 + "where ID_Cargo='"+ID_Cargo+"'";
+                
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
     
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
@@ -617,7 +666,26 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
-    
+    public void eliminarCargo(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Cargo = request.getParameter("ID_Cargo");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Cargos where ID_Cargo='" + ID_Cargo + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
     
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -684,6 +752,12 @@ public class ServletPrincipal extends HttpServlet {
                 request.getSession().removeAttribute("exito");
             }
             request.getRequestDispatcher("OpcionesUsuario/AgregarCalificacion.jsp").forward(request, response);
+        }else if (accion.equals("AgregarCargo")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarCargo.jsp").forward(request, response);
         }
     }
 
@@ -748,6 +822,15 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("EliminarCalificacion")) {
             eliminarCalificacion(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCalificaciones");
+        }else if (accion.equals("AgregarCargo")) {
+            agregarCargo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarCargo");
+        } else if (accion.equals("ModificarCargo")) {
+            modificarCargo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCargos");
+        } else if (accion.equals("EliminarCargo")) {
+            eliminarCargo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCargos");
         }
     }
 
