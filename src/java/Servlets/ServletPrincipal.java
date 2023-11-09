@@ -395,10 +395,115 @@ public class ServletPrincipal extends HttpServlet {
     }
 
     //Funciones de escritura en tablas (INSERT)
+    public void agregarEmpleado(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los empleados es autoincrementable
+        String DUI_Empleado = request.getParameter("DUI_Empleado");
+        String ISSS_Empleado = request.getParameter("ISSS_Empleado");
+        String nombresEmpleado = request.getParameter("nombresEmpleado");
+        String apellidosEmpleado = request.getParameter("apellidosEmpleado");
+        String fechaNacEmpleado = request.getParameter("fechaNacEmpleado");
+        String telefonoEmpleado = request.getParameter("telefonoEmpleado");
+        String correo = request.getParameter("correo");
+        String ID_Cargo = request.getParameter("ID_Cargo");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Empleados values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, DUI_Empleado);
+                pstmt.setString(2, ISSS_Empleado);
+                pstmt.setString(3, nombresEmpleado);
+                pstmt.setString(4, apellidosEmpleado);
+                pstmt.setString(5, fechaNacEmpleado);
+                pstmt.setString(6, telefonoEmpleado);
+                pstmt.setString(7, correo);
+                pstmt.setString(8, ID_Cargo);
+                pstmt.setString(9, ID_Direccion);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
     //Funciones de actualizacion de registros (UPDATE)
+    public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Empleado = request.getParameter("ID_Empleado");
+        String DUI_Empleado = request.getParameter("DUI_Empleado");
+        String ISSS_Empleado = request.getParameter("ISSS_Empleado");
+        String nombresEmpleado = request.getParameter("nombresEmpleado");
+        String apellidosEmpleado = request.getParameter("apellidosEmpleado");
+        String fechaNacEmpleado = request.getParameter("fechaNacEmpleado");
+        String telefonoEmpleado = request.getParameter("telefonoEmpleado");
+        String correo = request.getParameter("correo");
+        String ID_Cargo = request.getParameter("ID_Cargo");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                
+                String sql = "update Empleados set "
+                 + "DUI_Empleado='"+DUI_Empleado+"', "
+                 + "ISSS_Empleado='"+ISSS_Empleado+"', "
+                 + "NombresEmpleado='"+nombresEmpleado+"', "
+                 + "ApellidosEmpleado='"+apellidosEmpleado+"', "
+                 + "FechaNacEmpleado='"+fechaNacEmpleado+"', "
+                 + "TelefonoEmpleado='"+telefonoEmpleado+"', "
+                 + "Correo='"+correo+"', " 
+                 + "ID_Cargo='"+ID_Cargo+"', "
+                 + "ID_Direccion='"+ID_Direccion+"' " 
+                 + "where ID_Empleado='"+ID_Empleado+"'";
+                
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
     //Funciones de eliminacion de registros (DELETE)
-    
-    
+    public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Empleado = request.getParameter("ID_Empleado");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Empleados where ID_Empleado='" + ID_Empleado + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -420,38 +525,46 @@ public class ServletPrincipal extends HttpServlet {
             request.getRequestDispatcher("/Login.jsp").forward(request, response);
         } else if (accion.equals("GestionarCargos")) {
             mostrarCargos(request, response);
-            request.getRequestDispatcher("/GestionarCargos.jsp").forward(request, response);
-        }else if (accion.equals("GestionarEmpleados")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarCargos.jsp").forward(request, response);
+        } else if (accion.equals("GestionarEmpleados")) {
             mostrarEmpleados(request, response);
-            request.getRequestDispatcher("/GestionarEmpleados.jsp").forward(request, response);
-        }else if (accion.equals("GestionarEspecialidades")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarEmpleados.jsp").forward(request, response);
+        } else if (accion.equals("GestionarEspecialidades")) {
             mostrarEspecialidades(request, response);
-            request.getRequestDispatcher("/GestionarEspecialidades.jsp").forward(request, response);
-        }else if (accion.equals("GestionarUsuarios")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarEspecialidades.jsp").forward(request, response);
+        } else if (accion.equals("GestionarUsuarios")) {
             mostrarUsuarios(request, response);
-            request.getRequestDispatcher("/GestionarUsuarios.jsp").forward(request, response);
-        }else if (accion.equals("GestionarDocentes")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarUsuarios.jsp").forward(request, response);
+        } else if (accion.equals("GestionarDocentes")) {
             mostrarDocentes(request, response);
-            request.getRequestDispatcher("/GestionarDocentes.jsp").forward(request, response);
-        }else if (accion.equals("GestionarGrupos")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarDocentes.jsp").forward(request, response);
+        } else if (accion.equals("GestionarGrupos")) {
             mostrarGrupos(request, response);
-            request.getRequestDispatcher("/GestionarGrupos.jsp").forward(request, response);
-        }else if (accion.equals("GestionarEncargados")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarGrupos.jsp").forward(request, response);
+        } else if (accion.equals("GestionarEncargados")) {
             mostrarEncargados(request, response);
-            request.getRequestDispatcher("/GestionarEncargados.jsp").forward(request, response);
-        }else if (accion.equals("GestionarEstudiantes")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarEncargados.jsp").forward(request, response);
+        } else if (accion.equals("GestionarEstudiantes")) {
             mostrarEstudiantes(request, response);
-            request.getRequestDispatcher("/GestionarEstudiantes.jsp").forward(request, response);
-        }else if (accion.equals("GestionarMatriculas")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarEstudiantes.jsp").forward(request, response);
+        } else if (accion.equals("GestionarMatriculas")) {
             mostrarMatriculas(request, response);
-            request.getRequestDispatcher("/GestionarMatriculas.jsp").forward(request, response);
-        }else if (accion.equals("GestionarMaterias")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarMatriculas.jsp").forward(request, response);
+        } else if (accion.equals("GestionarMaterias")) {
             mostrarMaterias(request, response);
-            request.getRequestDispatcher("/GestionarMaterias.jsp").forward(request, response);
-        }else if (accion.equals("GestionarCalificaciones")) {
+            request.getRequestDispatcher("OpcionesUsuario/GestionarMaterias.jsp").forward(request, response);
+        } else if (accion.equals("GestionarCalificaciones")) {
             mostrarCalificaciones(request, response);
-            request.getRequestDispatcher("/GestionarCalificaciones.jsp").forward(request, response);
-        }  
+            request.getRequestDispatcher("OpcionesUsuario/GestionarCalificaciones.jsp").forward(request, response);
+
+            //REDIRECCION PARA JSP DE AGREGAR
+        } else if (accion.equals("AgregarEmpleado")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarEmpleado.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -475,8 +588,13 @@ public class ServletPrincipal extends HttpServlet {
 
             try (PrintWriter print = response.getWriter()) {
                 if (usuario.equals("admin") && contrasenia.equals("root")) {
-                    request.getRequestDispatcher("/PanelAdministrador.jsp").forward(request, response);
-
+                    request.getRequestDispatcher("PanelesUsuario/PanelAdministrador.jsp").forward(request, response);
+                } else if (usuario.equals("director") && contrasenia.equals("1234")) {
+                    request.getRequestDispatcher("PanelesUsuario/PanelDirector.jsp").forward(request, response);
+                } else if (usuario.equals("docente") && contrasenia.equals("1234")) {
+                    request.getRequestDispatcher("PanelesUsuario/PanelDocente.jsp").forward(request, response);
+                } else if (usuario.equals("rrhh") && contrasenia.equals("1234")) {
+                    request.getRequestDispatcher("PanelesUsuario/PanelRRHH.jsp").forward(request, response);
                 } else {
                     print.println("<!DOCTYPE html>");
                     print.println("<html>");
@@ -489,6 +607,20 @@ public class ServletPrincipal extends HttpServlet {
                     print.println("</html>");
                 }
             }
+        }
+
+        //CAPTURA DE DATOS ENVIADOS POR POST
+        if (accion.equals("AgregarEmpleado")) {
+            //LOS DATOS SE LE PASAN POR PARAMETRO A LA FUNCION
+            agregarEmpleado(request, response);
+            //REDIRIGE NUEVAMENTE A LA VISTA DE AGREGAR EMPLEADO
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEmpleado");
+        } else if (accion.equals("ModificarEmpleado")) {
+            modificarEmpleado(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEmpleados");
+        } else if (accion.equals("EliminarEmpleado")) {
+            eliminarEmpleado(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEmpleados");
         }
     }
 

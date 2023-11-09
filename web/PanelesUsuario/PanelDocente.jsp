@@ -1,6 +1,6 @@
 <%-- 
-    Document   : PanelAdministrador
-    Created on : 21 sept 2023, 01:22:58
+    Document   : PanelDocente
+    Created on : Nov 3, 2023, 7:37:23 AM
     Author     : david
 --%>
 
@@ -11,18 +11,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Panel del Administrador</title>
+        <title>Panel del Docente</title>
     </head>
     <body>
         <div><h1>Sistema Escolar 1.0</h1></div>
-        <%-- Setear la variable usuario con el parametro de la vista e imprimir--%>
         <c:set var="usuario" value="${param.tfUsuario}" />
         <div><h3><strong>¡Bienvenido, <c:out value="${usuario}" />!</strong></h3></div>
-
-        <%-- Directiva Include --%>
         <div><h3>Men&uacute; de opciones</h3></div>
         <div>
-            <%@include file="MenuAdministrador.jsp" %>
+            <%@include file="MenuDocente.jsp" %>
         </div>
         <div>            
             <%@include file="Footer.html" %>
