@@ -31,7 +31,7 @@
                     <th>Fecha de nacimiento</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>ID Cargo</th>
+                    <th>Cargo</th>
                     <th>ID Dirección</th>
                     <th>Acciones</th>
                 </tr>
@@ -46,8 +46,9 @@
                         <td><c:out value="${item.apellidosEmpleado}" /></td>
                         <td><c:out value="${item.fechaNacEmpleado}" /></td>
                         <td><c:out value="${item.telefonoEmpleado}" /></td>
-                        <td><c:out value="${item.correo}" /></td>                        
-                        <td><c:out value="${item.ID_Cargo}" /></td>
+                        <td><c:out value="${item.correo}" /></td>    
+                        <!-- <td><c:out value="${item.ID_Cargo}" /></td> -->
+                        <td><c:out value="${item.cargo}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
                         <td>
                             <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp">
@@ -62,7 +63,7 @@
                                 <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
                                 <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
                                 <input type="submit" value="Modificar" />
-                            </form>    
+                            </form>
                             <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />

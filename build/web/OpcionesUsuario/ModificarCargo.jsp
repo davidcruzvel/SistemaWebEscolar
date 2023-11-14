@@ -23,7 +23,7 @@
                 <input type="submit" value="Modificar" onclick="return confirm('¿Desea modificar el cargo?')" /><br><br> 
             </div>
             <div>
-                <a href="/SistemaWebEscolar/?accion=GestionarCargo">Regresar</a><br><br>
+                <a href="/SistemaWebEscolar/?accion=GestionarCargos">Regresar</a><br><br>
             </div>             
         </form>
     </body>
