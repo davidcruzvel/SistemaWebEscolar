@@ -16,8 +16,9 @@
     <body>
         <h1>Gestión de Grupos</h1>
         <h2>Listado de Grupos</h2>
-        <br>
-        <h3>Conexion: ${mensaje_conexion}</h3>
+        <h3>Conexion: ${mensaje_conexion}</h3><br>
+
+        <a href="/SistemaWebEscolar?accion=AgregarGrupo">Agregar grupo</a><br><br>
 
         <table border="1">
             <thead>
@@ -29,6 +30,7 @@
                     <th>ID Turno</th>
                     <th>ID Aula</th>
                     <th>ID Docente</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +43,28 @@
                         <td><c:out value="${item.ID_Turno}" /></td>
                         <td><c:out value="${item.ID_Aula}" /></td>
                         <td><c:out value="${item.ID_Docente}" /></td>
+                        <td>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarGrupo.jsp">
+                                <input type="hidden" name="ID_Grupo" value="${item.ID_Grupo}" />
+                                <input type="hidden" name="grado" value="${item.grado}" />
+                                <input type="hidden" name="seccion" value="${item.seccion}" />
+                                <input type="hidden" name="anio" value="${item.anio}" />
+                                <input type="hidden" name="ID_Turno" value="${item.ID_Turno}" />
+                                <input type="hidden" name="ID_Aula" value="${item.ID_Aula}" />
+                                <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
+                                <input type="submit" value="Modificar" />
+                            </form>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarGrupo.jsp">
+                                <input type="hidden" name="ID_Grupo" value="${item.ID_Grupo}" />
+                                <input type="hidden" name="grado" value="${item.grado}" />
+                                <input type="hidden" name="seccion" value="${item.seccion}" />
+                                <input type="hidden" name="anio" value="${item.anio}" />
+                                <input type="hidden" name="ID_Turno" value="${item.ID_Turno}" />
+                                <input type="hidden" name="ID_Aula" value="${item.ID_Aula}" />
+                                <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
+                                <input type="submit" value="Eliminar" />
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>            
