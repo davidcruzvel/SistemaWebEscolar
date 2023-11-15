@@ -16,9 +16,8 @@
     <body>
         <h1>Gestión de Empleados</h1>
         <h2>Listado de Empleados</h2>
-        <h3>Conexion: ${mensaje_conexion}</h3>
+        <h3>Conexion: ${mensaje_conexion}</h3><br>
 
-        <!-- AÑADIR OPCION DE NUEVO REGISTRO -->
         <a href="/SistemaWebEscolar?accion=AgregarEmpleado">Agregar empleado</a><br><br>
 
         <table border="1">
@@ -32,12 +31,9 @@
                     <th>Fecha de nacimiento</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>ID Cargo</th>
+                    <th>Cargo</th>
                     <th>ID Dirección</th>
-
-                    <!-- AÑADIR COLUMNA DE ACCIONES-->
                     <th>Acciones</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -50,11 +46,10 @@
                         <td><c:out value="${item.apellidosEmpleado}" /></td>
                         <td><c:out value="${item.fechaNacEmpleado}" /></td>
                         <td><c:out value="${item.telefonoEmpleado}" /></td>
-                        <td><c:out value="${item.correo}" /></td>                        
-                        <td><c:out value="${item.ID_Cargo}" /></td>
+                        <td><c:out value="${item.correo}" /></td>    
+                        <!-- <td><c:out value="${item.ID_Cargo}" /></td> -->
+                        <td><c:out value="${item.cargo}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
-
-                        <!-- AÑADIR OPCIONES DE MODIFICACION Y ELIMINACION -->
                         <td>
                             <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
@@ -68,7 +63,7 @@
                                 <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
                                 <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
                                 <input type="submit" value="Modificar" />
-                            </form>    
+                            </form>
                             <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />

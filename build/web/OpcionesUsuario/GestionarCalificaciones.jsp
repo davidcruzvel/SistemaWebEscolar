@@ -16,10 +16,10 @@
     <body>
         <h1>Gestión de Calificaciones</h1>
         <h2>Listado de Calificaciones</h2>
-        <br>
-        <h3>Conexion: ${mensaje_conexion}</h3>
-        <br>
-        <br>
+        <h3>Conexion: ${mensaje_conexion}</h3><br>
+
+        <a href="/SistemaWebEscolar?accion=AgregarCalificacion">Nueva Calificación</a><br><br>
+
         <table border="1">
             <thead>
                 <tr>
@@ -34,6 +34,7 @@
                     <th>Tareas</th>
                     <th>Promedio</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +51,36 @@
                         <td><c:out value="${item.tareas}" /></td>
                         <td><c:out value="${item.promedio}" /></td>
                         <td><c:out value="${item.estado}" /></td>
+                        <td>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarCalificacion.jsp">
+                                <input type="hidden" name="ID_Calificacion" value="${item.ID_Calificacion}" />
+                                <input type="hidden" name="ID_Materia" value="${item.ID_Materia}" />
+                                <input type="hidden" name="nie" value="${item.nie}" />
+                                <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
+                                <input type="hidden" name="examen1" value="${item.examen1}" />
+                                <input type="hidden" name="examen2" value="${item.examen2}" />
+                                <input type="hidden" name="examen3" value="${item.examen3}" />
+                                <input type="hidden" name="examenFinal" value="${item.examenFinal}" />
+                                <input type="hidden" name="tareas" value="${item.tareas}" />
+                                <input type="hidden" name="promedio" value="${item.promedio}" />
+                                <input type="hidden" name="estado" value="${item.estado}" />
+                                <input type="submit" value="Modificar" />
+                            </form>    
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarCalificacion.jsp">
+                                <input type="hidden" name="ID_Calificacion" value="${item.ID_Calificacion}" />
+                                <input type="hidden" name="ID_Materia" value="${item.ID_Materia}" />
+                                <input type="hidden" name="nie" value="${item.nie}" />
+                                <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
+                                <input type="hidden" name="examen1" value="${item.examen1}" />
+                                <input type="hidden" name="examen2" value="${item.examen2}" />
+                                <input type="hidden" name="examen3" value="${item.examen3}" />
+                                <input type="hidden" name="examenFinal" value="${item.examenFinal}" />
+                                <input type="hidden" name="tareas" value="${item.tareas}" />
+                                <input type="hidden" name="promedio" value="${item.promedio}" />
+                                <input type="hidden" name="estado" value="${item.estado}" />
+                                <input type="submit" value="Eliminar" />
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>            

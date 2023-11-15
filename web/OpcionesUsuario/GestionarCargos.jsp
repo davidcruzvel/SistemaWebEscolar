@@ -17,14 +17,16 @@
     <body>
         <h1>Gestión de Cargos</h1>
         <h2>Listado de Cargos</h2>
-        <br>
-        <h3>Conexion: ${mensaje_conexion}</h3>
+        <h3>Conexion: ${mensaje_conexion}</h3><br>
 
+        <a href="/SistemaWebEscolar?accion=AgregarCargo">Agregar cargo</a><br><br>
+        
         <table border="1">
             <thead>
                 <tr>
                     <th>ID Cargo</th>
                     <th>Cargo</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +34,18 @@
                     <tr>
                         <td><c:out value="${item.ID_Cargo}" /></td>
                         <td><c:out value="${item.cargo}" /></td>
+                        <td>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarCargo.jsp">
+                                <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
+                                <input type="hidden" name="cargo" value="${item.cargo}" />             
+                                <input type="submit" value="Modificar" />
+                            </form>    
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarCargo.jsp">
+                                <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
+                                <input type="hidden" name="cargo" value="${item.cargo}" />             
+                                <input type="submit" value="Eliminar" />
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>            

@@ -137,7 +137,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Empleados";
+                String sqlQuery = "select * from VistaEmpleados";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelEmpleados> listaEmpleados = new ArrayList<>();
@@ -151,7 +151,8 @@ public class ServletPrincipal extends HttpServlet {
                     empleado.setFechaNacEmpleado(rs.getDate("fechaNacEmpleado"));
                     empleado.setTelefonoEmpleado(rs.getString("telefonoEmpleado"));
                     empleado.setCorreo(rs.getString("correo"));
-                    empleado.setID_Cargo(rs.getInt("ID_Cargo"));
+                    empleado.setCargo(rs.getString("cargo"));
+                    //empleado.setID_Cargo(rs.getInt("ID_Cargo"));
                     empleado.setID_Direccion(rs.getInt("ID_Direccion"));
                     listaEmpleados.add(empleado);
                 }
@@ -436,6 +437,288 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
+    public void agregarCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de las calificaciones es autoincrementable
+        String ID_Materia = request.getParameter("ID_Materia");
+        String nie = request.getParameter("nie");
+        String ID_Docente = request.getParameter("ID_Docente");
+        String examen1 = request.getParameter("examen1");
+        String examen2 = request.getParameter("examen2");
+        String examen3 = request.getParameter("examen3");
+        String examenFinal = request.getParameter("examenFinal");
+        String tareas = request.getParameter("tareas");
+        String promedio = request.getParameter("promedio");
+        String estado = request.getParameter("estado");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Calificaciones values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, ID_Materia);
+                pstmt.setString(2, nie);
+                pstmt.setString(3, ID_Docente);
+                pstmt.setString(4, examen1);
+                pstmt.setString(5, examen2);
+                pstmt.setString(6, examen3);
+                pstmt.setString(7, examenFinal);
+                pstmt.setString(8, tareas);
+                pstmt.setString(9, promedio);
+                pstmt.setString(10, estado);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarCargo(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los cargos es autoincrementable
+        String cargo = request.getParameter("cargo");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Cargos values (?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, cargo);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarEspecialidad(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de las especialidades es autoincrementable
+        String nombreEspecialidad = request.getParameter("nombreEspecialidad");
+        String carrera = request.getParameter("carrera");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Especialidades values (?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, nombreEspecialidad);
+                pstmt.setString(2, carrera);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarDocente(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los docentes es autoincrementable
+        String ID_Empleado = request.getParameter("ID_Empleado");
+        String ID_Especialidad = request.getParameter("ID_Especialidad");
+        String escalafon = request.getParameter("escalafon");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Docentes values (?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, ID_Empleado);
+                pstmt.setString(2, ID_Especialidad);
+                pstmt.setString(3, escalafon);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarGrupo(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los grupos es autoincrementable
+        String grado = request.getParameter("grado");
+        String seccion = request.getParameter("seccion");
+        String anio = request.getParameter("anio");
+        String ID_Turno = request.getParameter("ID_Turno");
+        String ID_Aula = request.getParameter("ID_Aula");
+        String ID_Docente = request.getParameter("ID_Docente");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Grupos values (?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, grado);
+                pstmt.setString(2, seccion);
+                pstmt.setString(3, anio);
+                pstmt.setString(4, ID_Turno);
+                pstmt.setString(5, ID_Aula);
+                pstmt.setString(6, ID_Docente);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarEncargado(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los encargados es autoincrementable
+        String nombresEncargado = request.getParameter("nombresEncargado");
+        String apellidosEncargado = request.getParameter("apellidosEncargado");
+        String telefonoEncargado = request.getParameter("telefonoEncargado");
+        String DUI_Encargado = request.getParameter("DUI_Encargado");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Encargados values (?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, nombresEncargado);
+                pstmt.setString(2, apellidosEncargado);
+                pstmt.setString(3, telefonoEncargado);
+                pstmt.setString(4, DUI_Encargado);
+                pstmt.setString(5, ID_Direccion);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarEstudiante(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String nie = request.getParameter("nie");
+        String nombresEstudiante = request.getParameter("nombresEstudiante");
+        String apellidosEstudiante = request.getParameter("apellidosEstudiante");
+        String fechaNacEstudiante = request.getParameter("fechaNacEstudiante");
+        String generoEstudiante = request.getParameter("generoEstudiante");
+        String telefonoEstudiante = request.getParameter("telefonoEstudiante");
+        String ID_Encargado = request.getParameter("ID_Encargado");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Estudiantes values (?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, nie);
+                pstmt.setString(2, nombresEstudiante);
+                pstmt.setString(3, apellidosEstudiante);
+                pstmt.setString(4, fechaNacEstudiante);
+                pstmt.setString(5, generoEstudiante);
+                pstmt.setString(6, telefonoEstudiante);
+                pstmt.setString(7, ID_Encargado);
+                pstmt.setString(8, ID_Direccion);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void agregarMatricula(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de las matriculas es autoincrementable
+        String nie = request.getParameter("nie");
+        String ID_Grupo = request.getParameter("ID_Grupo");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Matriculas values (?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, nie);
+                pstmt.setString(2, ID_Grupo);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
+    public void agregarMateria(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de las materias es autoincrementable
+        String nombreMateria = request.getParameter("nombreMateria");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Materias values (?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, nombreMateria);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
     //Funciones de actualizacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
@@ -454,19 +737,19 @@ public class ServletPrincipal extends HttpServlet {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                
+
                 String sql = "update Empleados set "
-                 + "DUI_Empleado='"+DUI_Empleado+"', "
-                 + "ISSS_Empleado='"+ISSS_Empleado+"', "
-                 + "NombresEmpleado='"+nombresEmpleado+"', "
-                 + "ApellidosEmpleado='"+apellidosEmpleado+"', "
-                 + "FechaNacEmpleado='"+fechaNacEmpleado+"', "
-                 + "TelefonoEmpleado='"+telefonoEmpleado+"', "
-                 + "Correo='"+correo+"', " 
-                 + "ID_Cargo='"+ID_Cargo+"', "
-                 + "ID_Direccion='"+ID_Direccion+"' " 
-                 + "where ID_Empleado='"+ID_Empleado+"'";
-                
+                        + "DUI_Empleado='" + DUI_Empleado + "', "
+                        + "ISSS_Empleado='" + ISSS_Empleado + "', "
+                        + "NombresEmpleado='" + nombresEmpleado + "', "
+                        + "ApellidosEmpleado='" + apellidosEmpleado + "', "
+                        + "FechaNacEmpleado='" + fechaNacEmpleado + "', "
+                        + "TelefonoEmpleado='" + telefonoEmpleado + "', "
+                        + "Correo='" + correo + "', "
+                        + "ID_Cargo='" + ID_Cargo + "', "
+                        + "ID_Direccion='" + ID_Direccion + "' "
+                        + "where ID_Empleado='" + ID_Empleado + "'";
+
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 int registros = pstmt.executeUpdate();
                 if (registros > 0) {
@@ -481,6 +764,318 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
+    public void modificarCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Calificacion = request.getParameter("ID_Calificacion");
+        String ID_Materia = request.getParameter("ID_Materia");
+        String nie = request.getParameter("nie");
+        String ID_Docente = request.getParameter("ID_Docente");
+        String examen1 = request.getParameter("examen1");
+        String examen2 = request.getParameter("examen2");
+        String examen3 = request.getParameter("examen3");
+        String examenFinal = request.getParameter("examenFinal");
+        String tareas = request.getParameter("tareas");
+        String promedio = request.getParameter("promedio");
+        String estado = request.getParameter("estado");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Calificaciones set "
+                        + "ID_Materia='" + ID_Materia + "', "
+                        + "nie='" + nie + "', "
+                        + "ID_Docente='" + ID_Docente + "', "
+                        + "examen1='" + examen1 + "', "
+                        + "examen2='" + examen2 + "', "
+                        + "examen3='" + examen3 + "', "
+                        + "examenFinal='" + examenFinal + "', "
+                        + "tareas='" + tareas + "', "
+                        + "promedio='" + promedio + "', "
+                        + "estado='" + estado + "' "
+                        + "where ID_Calificacion='" + ID_Calificacion + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarCargo(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Cargo = request.getParameter("ID_Cargo");
+        String cargo = request.getParameter("cargo");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Cargos set "
+                        + "cargo='" + cargo + "' "
+                        + "where ID_Cargo='" + ID_Cargo + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarEspecialidad(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Especialidad = request.getParameter("ID_Especialidad");
+        String nombreEspecialidad = request.getParameter("nombreEspecialidad");
+        String carrera = request.getParameter("carrera");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Especialidades set "
+                        + "nombreEspecialidad='" + nombreEspecialidad + "', "
+                        + "carrera='" + carrera + "' "
+                        + "where ID_Especialidad='" + ID_Especialidad + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarDocente(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Docente = request.getParameter("ID_Docente");
+        String ID_Empleado = request.getParameter("ID_Empleado");
+        String ID_Especialidad = request.getParameter("ID_Especialidad");
+        String escalafon = request.getParameter("escalafon");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Docentes set "
+                        + "ID_Empleado='" + ID_Empleado + "', "
+                        + "ID_Especialidad='" + ID_Especialidad + "', "
+                        + "escalafon='" + escalafon + "' "
+                        + "where ID_Docente='" + ID_Docente + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarGrupo(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Grupo = request.getParameter("ID_Grupo");
+        String grado = request.getParameter("grado");
+        String seccion = request.getParameter("seccion");
+        String anio = request.getParameter("anio");
+        String ID_Turno = request.getParameter("ID_Turno");
+        String ID_Aula = request.getParameter("ID_Aula");
+        String ID_Docente = request.getParameter("ID_Docente");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Grupos set "
+                        + "grado='" + grado + "', "
+                        + "seccion='" + seccion + "', "
+                        + "anio='" + anio + "', "
+                        + "ID_Turno='" + ID_Turno + "', "
+                        + "ID_Aula='" + ID_Aula + "', "
+                        + "ID_Docente='" + ID_Docente + "' "
+                        + "where ID_Grupo='" + ID_Grupo + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarEncargado(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Encargado = request.getParameter("ID_Encargado");
+        String nombresEncargado = request.getParameter("nombresEncargado");
+        String apellidosEncargado = request.getParameter("apellidosEncargado");
+        String telefonoEncargado = request.getParameter("telefonoEncargado");
+        String DUI_Encargado = request.getParameter("DUI_Encargado");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Encargados set "
+                        + "nombresEncargado='" + nombresEncargado + "', "
+                        + "apellidosEncargado='" + apellidosEncargado + "', "
+                        + "telefonoEncargado='" + telefonoEncargado + "', "
+                        + "DUI_Encargado='" + DUI_Encargado + "', "
+                        + "ID_Direccion='" + ID_Direccion + "' "
+                        + "where ID_Encargado='" + ID_Encargado + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarEstudiante(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String auxnie = request.getParameter("auxnie");
+        String nie = request.getParameter("nie");
+        String nombresEstudiante = request.getParameter("nombresEstudiante");
+        String apellidosEstudiante = request.getParameter("apellidosEstudiante");
+        String fechaNacEstudiante = request.getParameter("fechaNacEstudiante");
+        String generoEstudiante = request.getParameter("generoEstudiante");
+        String telefonoEstudiante = request.getParameter("telefonoEstudiante");
+        String ID_Encargado = request.getParameter("ID_Encargado");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        System.out.print(nie);
+        System.out.print(auxnie);
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Estudiantes set "
+                        + "nie='" + nie + "', "
+                        + "nombresEstudiante='" + nombresEstudiante + "', "
+                        + "apellidosEstudiante='" + apellidosEstudiante + "', "
+                        + "fechaNacEstudiante='" + fechaNacEstudiante + "', "
+                        + "generoEstudiante='" + generoEstudiante + "', "
+                        + "telefonoEstudiante='" + telefonoEstudiante + "', "
+                        + "ID_Encargado='" + ID_Encargado + "', "
+                        + "ID_Direccion='" + ID_Direccion + "' "
+                        + "where nie='" + auxnie + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void modificarMatricula(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Matricula = request.getParameter("ID_Matricula");
+        String nie = request.getParameter("nie");
+        String ID_Grupo = request.getParameter("ID_Grupo");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Matriculas set "
+                        + "nie='" + nie + "', "
+                        + "ID_Grupo='" + ID_Grupo + "' "
+                        + "where ID_Matricula='" + ID_Matricula + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
+    public void modificarMateria(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Materia = request.getParameter("ID_Materia");
+        String nombreMateria = request.getParameter("nombreMateria");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Materias set "
+                        + "nombreMateria='" + nombreMateria + "' "
+                        + "where ID_Materia='" + ID_Materia + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -503,6 +1098,195 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
+    public void eliminarCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Calificacion = request.getParameter("ID_Calificacion");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Calificaciones where ID_Calificacion='" + ID_Calificacion + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarCargo(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Cargo = request.getParameter("ID_Cargo");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Cargos where ID_Cargo='" + ID_Cargo + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarEspecialidad(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Especialidad = request.getParameter("ID_Especialidad");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Especialidades where ID_Especialidad='" + ID_Especialidad + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarDocente(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Docente = request.getParameter("ID_Docente");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Docentes where ID_Docente='" + ID_Docente + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarGrupo(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Grupo = request.getParameter("ID_Grupo");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Grupos where ID_Grupo='" + ID_Grupo + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarEncargado(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Encargado = request.getParameter("ID_Encargado");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Encargados where ID_Encargado='" + ID_Encargado + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarEstudiante(HttpServletRequest request, HttpServletResponse response) {
+        String nie = request.getParameter("nie");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Estudiantes where nie='" + nie + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
+    public void eliminarMatricula(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Matricula = request.getParameter("ID_Matricula");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Matriculas where ID_Matricula='" + ID_Matricula + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
+    public void eliminarMateria(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Materia = request.getParameter("ID_Materia");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Materias where ID_Materia='" + ID_Materia + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -556,15 +1340,68 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("GestionarCalificaciones")) {
             mostrarCalificaciones(request, response);
             request.getRequestDispatcher("OpcionesUsuario/GestionarCalificaciones.jsp").forward(request, response);
-
-            //REDIRECCION PARA JSP DE AGREGAR
         } else if (accion.equals("AgregarEmpleado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
             request.getRequestDispatcher("OpcionesUsuario/AgregarEmpleado.jsp").forward(request, response);
+        } else if (accion.equals("AgregarCalificacion")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarCalificacion.jsp").forward(request, response);
+        } else if (accion.equals("AgregarCargo")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarCargo.jsp").forward(request, response);
+        } else if (accion.equals("AgregarEspecialidad")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarEspecialidad.jsp").forward(request, response);
+        } else if (accion.equals("AgregarDocente")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarDocente.jsp").forward(request, response);
+        } else if (accion.equals("AgregarGrupo")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarGrupo.jsp").forward(request, response);
+        } else if (accion.equals("AgregarEncargado")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarEncargado.jsp").forward(request, response);
+        } else if (accion.equals("AgregarEstudiante")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarEstudiante.jsp").forward(request, response);
+        } else if (accion.equals("AgregarMatricula")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarMatricula.jsp").forward(request, response);
+        } else if (accion.equals("AgregarMateria")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarMateria.jsp").forward(request, response);
         }
+
     }
 
     /**
@@ -611,9 +1448,7 @@ public class ServletPrincipal extends HttpServlet {
 
         //CAPTURA DE DATOS ENVIADOS POR POST
         if (accion.equals("AgregarEmpleado")) {
-            //LOS DATOS SE LE PASAN POR PARAMETRO A LA FUNCION
             agregarEmpleado(request, response);
-            //REDIRIGE NUEVAMENTE A LA VISTA DE AGREGAR EMPLEADO
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEmpleado");
         } else if (accion.equals("ModificarEmpleado")) {
             modificarEmpleado(request, response);
@@ -621,6 +1456,87 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("EliminarEmpleado")) {
             eliminarEmpleado(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEmpleados");
+        } else if (accion.equals("AgregarCalificacion")) {
+            agregarCalificacion(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarCalificacion");
+        } else if (accion.equals("ModificarCalificacion")) {
+            modificarCalificacion(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCalificaciones");
+        } else if (accion.equals("EliminarCalificacion")) {
+            eliminarCalificacion(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCalificaciones");
+        } else if (accion.equals("AgregarCargo")) {
+            agregarCargo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarCargo");
+        } else if (accion.equals("ModificarCargo")) {
+            modificarCargo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCargos");
+        } else if (accion.equals("EliminarCargo")) {
+            eliminarCargo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarCargos");
+        } else if (accion.equals("AgregarEspecialidad")) {
+            agregarEspecialidad(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEspecialidad");
+        } else if (accion.equals("ModificarEspecialidad")) {
+            modificarEspecialidad(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEspecialidades");
+        } else if (accion.equals("EliminarEspecialidad")) {
+            eliminarEspecialidad(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEspecialidades");
+        } else if (accion.equals("AgregarDocente")) {
+            agregarDocente(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarDocente");
+        } else if (accion.equals("ModificarDocente")) {
+            modificarDocente(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarDocentes");
+        } else if (accion.equals("EliminarDocente")) {
+            eliminarDocente(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarDocentes");
+        } else if (accion.equals("AgregarGrupo")) {
+            agregarGrupo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarGrupo");
+        } else if (accion.equals("ModificarGrupo")) {
+            modificarGrupo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarGrupos");
+        } else if (accion.equals("EliminarGrupo")) {
+            eliminarGrupo(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarGrupos");
+        } else if (accion.equals("AgregarEncargado")) {
+            agregarEncargado(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEncargado");
+        } else if (accion.equals("ModificarEncargado")) {
+            modificarEncargado(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEncargados");
+        } else if (accion.equals("EliminarEncargado")) {
+            eliminarEncargado(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEncargados");
+        } else if (accion.equals("AgregarEstudiante")) {
+            agregarEstudiante(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEstudiante");
+        } else if (accion.equals("ModificarEstudiante")) {
+            modificarEstudiante(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEstudiantes");
+        } else if (accion.equals("EliminarEstudiante")) {
+            eliminarEstudiante(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEstudiantes");
+        } else if (accion.equals("AgregarMatricula")) {
+            agregarMatricula(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarMatricula");
+        } else if (accion.equals("ModificarMatricula")) {
+            modificarMatricula(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarMatriculas");
+        } else if (accion.equals("EliminarMatricula")) {
+            eliminarMatricula(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarMatriculas");
+        } else if (accion.equals("AgregarMateria")) {
+            agregarMateria(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarMateria");
+        } else if (accion.equals("ModificarMateria")) {
+            modificarMateria(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarMaterias");
+        } else if (accion.equals("EliminarMateria")) {
+            eliminarMateria(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarMaterias");
         }
     }
 
