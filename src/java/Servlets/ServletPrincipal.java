@@ -531,6 +531,35 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
+    
+    public void agregarDocente(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        //El ID de los docentes es autoincrementable
+        String ID_Empleado = request.getParameter("ID_Empleado");
+        String ID_Especialidad = request.getParameter("ID_Especialidad");
+        String escalafon = request.getParameter("escalafon");    
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Docentes values (?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, ID_Empleado);
+                pstmt.setString(2, ID_Especialidad);
+                pstmt.setString(3, escalafon);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
 
     //Funciones de actualizacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
@@ -681,6 +710,38 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
+    public void modificarDocente(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String ID_Docente = request.getParameter("ID_Docente");
+        String ID_Empleado = request.getParameter("ID_Empleado");
+        String ID_Especialidad = request.getParameter("ID_Especialidad");
+        String escalafon = request.getParameter("escalafon");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Docentes set "
+                        + "ID_Empleado='" + ID_Empleado + "', "
+                        + "ID_Especialidad='" + ID_Especialidad + "', "
+                        + "escalafon='" + escalafon + "' "
+                        + "where ID_Docente='" + ID_Docente + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -766,6 +827,27 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
 
+    public void eliminarDocente(HttpServletRequest request, HttpServletResponse response) {
+        String ID_Docente = request.getParameter("ID_Docente");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Docentes where ID_Docente='" + ID_Docente + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+    
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -843,6 +925,12 @@ public class ServletPrincipal extends HttpServlet {
                 request.getSession().removeAttribute("exito");
             }
             request.getRequestDispatcher("OpcionesUsuario/AgregarEspecialidad.jsp").forward(request, response);
+        } else if (accion.equals("AgregarDocente")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarDocente.jsp").forward(request, response);
         }
 
     }
@@ -926,6 +1014,15 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("EliminarEspecialidad")) {
             eliminarEspecialidad(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEspecialidades");
+        } else if (accion.equals("AgregarDocente")) {
+            agregarDocente(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarDocente");
+        } else if (accion.equals("ModificarDocente")) {
+            modificarDocente(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarDocentes");
+        } else if (accion.equals("EliminarDocente")) {
+            eliminarDocente(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarDocentes");
         }
     }
 

@@ -14,10 +14,11 @@
     </head>
     <body>
         <h1>Gestión de Docentes</h1>
-        <h2>Listado de Docentes</h2>
-        <br>
-        <h3>Conexion: ${mensaje_conexion}</h3>
+        <h2>Listado de Docentes</h2>        
+        <h3>Conexion: ${mensaje_conexion}</h3><br><br>
 
+        <a href="/SistemaWebEscolar?accion=AgregarDocente">Agregar docente</a><br><br>
+        
         <table border="1">
             <thead>
                 <tr>
@@ -25,6 +26,7 @@
                     <th>ID Empleado</th>
                     <th>ID Especialidad</th>
                     <th>Escalafón</th>                    
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +36,22 @@
                         <td><c:out value="${item.ID_Empleado}" /></td>
                         <td><c:out value="${item.ID_Especialidad}" /></td>                        
                         <td><c:out value="${item.escalafon}" /></td>
+                        <td>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarDocente.jsp">
+                                <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
+                                <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
+                                <input type="hidden" name="ID_Especialidad" value="${item.ID_Especialidad}" />
+                                <input type="hidden" name="escalafon" value="${item.escalafon}" />
+                                <input type="submit" value="Modificar" />
+                            </form>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarDocente.jsp">
+                                <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
+                                <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
+                                <input type="hidden" name="ID_Especialidad" value="${item.ID_Especialidad}" />
+                                <input type="hidden" name="escalafon" value="${item.escalafon}" />
+                                <input type="submit" value="Eliminar" />
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>            
