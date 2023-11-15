@@ -531,13 +531,13 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void agregarDocente(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         //El ID de los docentes es autoincrementable
         String ID_Empleado = request.getParameter("ID_Empleado");
         String ID_Especialidad = request.getParameter("ID_Especialidad");
-        String escalafon = request.getParameter("escalafon");    
+        String escalafon = request.getParameter("escalafon");
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -595,7 +595,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void agregarEncargado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         //El ID de los encargados es autoincrementable
@@ -628,7 +628,45 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
+    public void agregarEstudiante(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String nie = request.getParameter("nie");
+        String nombresEstudiante = request.getParameter("nombresEstudiante");
+        String apellidosEstudiante = request.getParameter("apellidosEstudiante");
+        String fechaNacEstudiante = request.getParameter("fechaNacEstudiante");
+        String generoEstudiante = request.getParameter("generoEstudiante");
+        String telefonoEstudiante = request.getParameter("telefonoEstudiante");
+        String ID_Encargado = request.getParameter("ID_Encargado");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "insert into Estudiantes values (?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, nie);
+                pstmt.setString(2, nombresEstudiante);
+                pstmt.setString(3, apellidosEstudiante);
+                pstmt.setString(4, fechaNacEstudiante);
+                pstmt.setString(5, generoEstudiante);
+                pstmt.setString(6, telefonoEstudiante);
+                pstmt.setString(7, ID_Encargado);
+                pstmt.setString(8, ID_Direccion);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
     //Funciones de actualizacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
@@ -809,7 +847,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void modificarGrupo(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         String ID_Grupo = request.getParameter("ID_Grupo");
@@ -847,7 +885,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void modificarEncargado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         String ID_Encargado = request.getParameter("ID_Encargado");
@@ -883,7 +921,51 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
+    public void modificarEstudiante(HttpServletRequest request, HttpServletResponse response) {
+        //CAPTURA DE VARIABLES
+        String auxnie = request.getParameter("auxnie");
+        String nie = request.getParameter("nie");
+        String nombresEstudiante = request.getParameter("nombresEstudiante");
+        String apellidosEstudiante = request.getParameter("apellidosEstudiante");
+        String fechaNacEstudiante = request.getParameter("fechaNacEstudiante");
+        String generoEstudiante = request.getParameter("generoEstudiante");
+        String telefonoEstudiante = request.getParameter("telefonoEstudiante");
+        String ID_Encargado = request.getParameter("ID_Encargado");
+        String ID_Direccion = request.getParameter("ID_Direccion");
+
+        System.out.print(nie);
+        System.out.print(auxnie);
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+
+                String sql = "update Estudiantes set "
+                        + "nie='" + nie + "', "
+                        + "nombresEstudiante='" + nombresEstudiante + "', "
+                        + "apellidosEstudiante='" + apellidosEstudiante + "', "
+                        + "fechaNacEstudiante='" + fechaNacEstudiante + "', "
+                        + "generoEstudiante='" + generoEstudiante + "', "
+                        + "telefonoEstudiante='" + telefonoEstudiante + "', "
+                        + "ID_Encargado='" + ID_Encargado + "', "
+                        + "ID_Direccion='" + ID_Direccion + "' "
+                        + "where nie='" + auxnie + "'";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -989,7 +1071,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void eliminarGrupo(HttpServletRequest request, HttpServletResponse response) {
         String ID_Grupo = request.getParameter("ID_Grupo");
         try {
@@ -1010,7 +1092,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void eliminarEncargado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Encargado = request.getParameter("ID_Encargado");
         try {
@@ -1031,7 +1113,28 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
+    public void eliminarEstudiante(HttpServletRequest request, HttpServletResponse response) {
+        String nie = request.getParameter("nie");
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection conn = DriverManager.getConnection(url)) {
+                request.setAttribute("mensaje_conexion", "Ok!");
+                String sql = "delete from Estudiantes where nie='" + nie + "'";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                int registros = pstmt.executeUpdate();
+                if (registros > 0) {
+                    request.getSession().setAttribute("exito", true);
+                } else {
+                    request.getSession().setAttribute("exito", false);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            request.getSession().setAttribute("exito", false);
+            ex.printStackTrace();
+        }
+    }
+
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -1121,12 +1224,18 @@ public class ServletPrincipal extends HttpServlet {
                 request.getSession().removeAttribute("exito");
             }
             request.getRequestDispatcher("OpcionesUsuario/AgregarGrupo.jsp").forward(request, response);
-        }else if (accion.equals("AgregarEncargado")) {
+        } else if (accion.equals("AgregarEncargado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
             request.getRequestDispatcher("OpcionesUsuario/AgregarEncargado.jsp").forward(request, response);
+        } else if (accion.equals("AgregarEstudiante")) {
+            if (request.getSession().getAttribute("exito") != null) {
+                request.setAttribute("exito", request.getSession().getAttribute("exito"));
+                request.getSession().removeAttribute("exito");
+            }
+            request.getRequestDispatcher("OpcionesUsuario/AgregarEstudiante.jsp").forward(request, response);
         }
 
     }
@@ -1228,7 +1337,7 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("EliminarGrupo")) {
             eliminarGrupo(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarGrupos");
-        }else if (accion.equals("AgregarEncargado")) {
+        } else if (accion.equals("AgregarEncargado")) {
             agregarEncargado(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEncargado");
         } else if (accion.equals("ModificarEncargado")) {
@@ -1237,6 +1346,15 @@ public class ServletPrincipal extends HttpServlet {
         } else if (accion.equals("EliminarEncargado")) {
             eliminarEncargado(request, response);
             response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEncargados");
+        } else if (accion.equals("AgregarEstudiante")) {
+            agregarEstudiante(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=AgregarEstudiante");
+        } else if (accion.equals("ModificarEstudiante")) {
+            modificarEstudiante(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEstudiantes");
+        } else if (accion.equals("EliminarEstudiante")) {
+            eliminarEstudiante(request, response);
+            response.sendRedirect(request.getContextPath() + "/ServletPrincipal?accion=GestionarEstudiantes");
         }
     }
 

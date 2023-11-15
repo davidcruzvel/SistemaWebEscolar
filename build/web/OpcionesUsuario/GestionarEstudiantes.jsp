@@ -15,8 +15,9 @@
     <body>
         <h1>Gestión de Estudiantes</h1>
         <h2>Listado de Estudiantes</h2>
-        <br>
-        <h3>Conexion: ${mensaje_conexion}</h3>
+        <h3>Conexion: ${mensaje_conexion}</h3><br>
+
+        <a href="/SistemaWebEscolar?accion=AgregarEstudiante">Agregar estudiante</a><br><br>
 
         <table border="1">
             <thead>
@@ -29,6 +30,7 @@
                     <th>Teléfono</th>
                     <th>ID Encargado</th>
                     <th>ID Dirección</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +44,30 @@
                         <td><c:out value="${item.telefonoEstudiante}" /></td>                        
                         <td><c:out value="${item.ID_Encargado}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
+                        <td>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEstudiante.jsp">
+                                <input type="hidden" name="nie" value="${item.nie}" />
+                                <input type="hidden" name="nombresEstudiante" value="${item.nombresEstudiante}" />
+                                <input type="hidden" name="apellidosEstudiante" value="${item.apellidosEstudiante}" />
+                                <input type="hidden" name="fechaNacEstudiante" value="${item.fechaNacEstudiante}" />
+                                <input type="hidden" name="generoEstudiante" value="${item.generoEstudiante}" />
+                                <input type="hidden" name="telefonoEstudiante" value="${item.telefonoEstudiante}" />
+                                <input type="hidden" name="ID_Encargado" value="${item.ID_Encargado}" />
+                                <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
+                                <input type="submit" value="Modificar" />
+                            </form>
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEstudiante.jsp">
+                                <input type="hidden" name="nie" value="${item.nie}" />
+                                <input type="hidden" name="nombresEstudiante" value="${item.nombresEstudiante}" />
+                                <input type="hidden" name="apellidosEstudiante" value="${item.apellidosEstudiante}" />
+                                <input type="hidden" name="fechaNacEstudiante" value="${item.fechaNacEstudiante}" />
+                                <input type="hidden" name="generoEstudiante" value="${item.generoEstudiante}" />
+                                <input type="hidden" name="telefonoEstudiante" value="${item.telefonoEstudiante}" />
+                                <input type="hidden" name="ID_Encargado" value="${item.ID_Encargado}" />
+                                <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
+                                <input type="submit" value="Eliminar" />
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>            
