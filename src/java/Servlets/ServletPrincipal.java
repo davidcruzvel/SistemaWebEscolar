@@ -151,13 +151,13 @@ public class ServletPrincipal extends HttpServlet {
                     empleado.setFechaNacEmpleado(rs.getDate("fechaNacEmpleado"));
                     empleado.setTelefonoEmpleado(rs.getString("telefonoEmpleado"));
                     empleado.setCorreo(rs.getString("correo"));
+                    empleado.setID_Cargo(rs.getInt("ID_Cargo"));
                     empleado.setCargo(rs.getString("cargo"));
-                    //empleado.setID_Cargo(rs.getInt("ID_Cargo"));
                     empleado.setID_Direccion(rs.getInt("ID_Direccion"));
+                    empleado.setDireccionCompleta(rs.getString("direccionCompleta"));
                     listaEmpleados.add(empleado);
                 }
                 request.setAttribute("listaEmpleados", listaEmpleados);
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
             request.setAttribute("mensaje_conexion", ex.getMessage());
@@ -719,7 +719,7 @@ public class ServletPrincipal extends HttpServlet {
         }
     }
     
-    //Funciones de actualizacion de registros (UPDATE)
+    //Funciones de modificacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         String ID_Empleado = request.getParameter("ID_Empleado");

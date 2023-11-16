@@ -12,8 +12,6 @@ import java.util.Date;
  */
 public class ViewModelEmpleados {
 
-   
-
     //Atributos de la tabla Empleados
     private int ID_Empleado;
     private String DUI_Empleado;
@@ -24,10 +22,9 @@ public class ViewModelEmpleados {
     private String telefonoEmpleado;
     private String correo;
     private int ID_Cargo;
-    private int ID_Direccion;
-  
-    //Experimento
     private String cargo;
+    private int ID_Direccion;
+    private String direccionCompleta;
 
     //Metodos de la clase ViewModelEmpleados
     /**
@@ -155,6 +152,20 @@ public class ViewModelEmpleados {
     public void setID_Cargo(int ID_Cargo) {
         this.ID_Cargo = ID_Cargo;
     }
+    
+     /**
+     * @return the cargo
+     */
+    public String getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
     /**
      * @return the ID_Direccion
@@ -170,22 +181,18 @@ public class ViewModelEmpleados {
         this.ID_Direccion = ID_Direccion;
     }
     
-    // Experimento
-    
-     /**
-     * @return the cargo
+    /**
+     * @return the direccionCompleta
      */
-    public String getCargo() {
-        return cargo;
+    public String getDireccionCompleta() {
+        return direccionCompleta;
     }
 
     /**
-     * @param cargo the cargo to set
+     * @param direccionCompleta the direccionCompleta to set
      */
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setDireccionCompleta(String direccionCompleta) {
+        this.direccionCompleta = direccionCompleta;
     }
-    
-   
     
 }
