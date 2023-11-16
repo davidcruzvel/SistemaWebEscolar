@@ -34,12 +34,12 @@
                         <td><c:out value="${item.ID_Materia}" /></td>
                         <td><c:out value="${item.nombreMateria}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarMateria.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarMateria.jsp">
                                 <input type="hidden" name="ID_Materia" value="${item.ID_Materia}" />
                                 <input type="hidden" name="nombreMateria" value="${item.nombreMateria}" />             
                                 <input type="submit" value="Modificar" />
                             </form>    
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarMateria.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarMateria.jsp">
                                 <input type="hidden" name="ID_Materia" value="${item.ID_Materia}" />
                                 <input type="hidden" name="nombreMateria" value="${item.nombreMateria}" />             
                                 <input type="submit" value="Eliminar" />

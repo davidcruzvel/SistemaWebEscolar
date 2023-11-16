@@ -1313,97 +1313,97 @@ public class ServletPrincipal extends HttpServlet {
             request.getRequestDispatcher("/Login.jsp").forward(request, response);
         } else if (accion.equals("GestionarCargos")) {
             mostrarCargos(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarCargos.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarCargos.jsp").forward(request, response);
         } else if (accion.equals("GestionarEmpleados")) {
             mostrarEmpleados(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEmpleados.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEmpleados.jsp").forward(request, response);
         } else if (accion.equals("GestionarEspecialidades")) {
             mostrarEspecialidades(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEspecialidades.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEspecialidades.jsp").forward(request, response);
         } else if (accion.equals("GestionarUsuarios")) {
             mostrarUsuarios(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarUsuarios.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarUsuarios.jsp").forward(request, response);
         } else if (accion.equals("GestionarDocentes")) {
             mostrarDocentes(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarDocentes.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarDocentes.jsp").forward(request, response);
         } else if (accion.equals("GestionarGrupos")) {
             mostrarGrupos(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarGrupos.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarGrupos.jsp").forward(request, response);
         } else if (accion.equals("GestionarEncargados")) {
             mostrarEncargados(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEncargados.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEncargados.jsp").forward(request, response);
         } else if (accion.equals("GestionarEstudiantes")) {
             mostrarEstudiantes(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEstudiantes.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEstudiantes.jsp").forward(request, response);
         } else if (accion.equals("GestionarMatriculas")) {
             mostrarMatriculas(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarMatriculas.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarMatriculas.jsp").forward(request, response);
         } else if (accion.equals("GestionarMaterias")) {
             mostrarMaterias(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarMaterias.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarMaterias.jsp").forward(request, response);
         } else if (accion.equals("GestionarCalificaciones")) {
             mostrarCalificaciones(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarCalificaciones.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarCalificaciones.jsp").forward(request, response);
         } else if (accion.equals("AgregarEmpleado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEmpleado.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEmpleado.jsp").forward(request, response);
         } else if (accion.equals("AgregarCalificacion")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarCalificacion.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarCalificacion.jsp").forward(request, response);
         } else if (accion.equals("AgregarCargo")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarCargo.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarCargo.jsp").forward(request, response);
         } else if (accion.equals("AgregarEspecialidad")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEspecialidad.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEspecialidad.jsp").forward(request, response);
         } else if (accion.equals("AgregarDocente")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarDocente.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarDocente.jsp").forward(request, response);
         } else if (accion.equals("AgregarGrupo")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarGrupo.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarGrupo.jsp").forward(request, response);
         } else if (accion.equals("AgregarEncargado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEncargado.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEncargado.jsp").forward(request, response);
         } else if (accion.equals("AgregarEstudiante")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEstudiante.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEstudiante.jsp").forward(request, response);
         } else if (accion.equals("AgregarMatricula")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarMatricula.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarMatricula.jsp").forward(request, response);
         } else if (accion.equals("AgregarMateria")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarMateria.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarMateria.jsp").forward(request, response);
         }
 
     }

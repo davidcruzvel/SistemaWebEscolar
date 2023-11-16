@@ -42,7 +42,7 @@
                         <td><c:out value="${item.DUI_Encargado}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEncargado.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarEncargado.jsp">
                                 <input type="hidden" name="ID_Encargado" value="${item.ID_Encargado}" />
                                 <input type="hidden" name="nombresEncargado" value="${item.nombresEncargado}" />
                                 <input type="hidden" name="apellidosEncargado" value="${item.apellidosEncargado}" />
@@ -51,7 +51,7 @@
                                 <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
                                 <input type="submit" value="Modificar" />
                             </form>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEncargado.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarEncargado.jsp">
                                 <input type="hidden" name="ID_Encargado" value="${item.ID_Encargado}" />
                                 <input type="hidden" name="nombresEncargado" value="${item.nombresEncargado}" />
                                 <input type="hidden" name="apellidosEncargado" value="${item.apellidosEncargado}" />

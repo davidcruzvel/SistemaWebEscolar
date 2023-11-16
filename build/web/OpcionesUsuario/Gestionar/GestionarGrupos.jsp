@@ -44,7 +44,7 @@
                         <td><c:out value="${item.ID_Aula}" /></td>
                         <td><c:out value="${item.ID_Docente}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarGrupo.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarGrupo.jsp">
                                 <input type="hidden" name="ID_Grupo" value="${item.ID_Grupo}" />
                                 <input type="hidden" name="grado" value="${item.grado}" />
                                 <input type="hidden" name="seccion" value="${item.seccion}" />
@@ -54,7 +54,7 @@
                                 <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
                                 <input type="submit" value="Modificar" />
                             </form>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarGrupo.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarGrupo.jsp">
                                 <input type="hidden" name="ID_Grupo" value="${item.ID_Grupo}" />
                                 <input type="hidden" name="grado" value="${item.grado}" />
                                 <input type="hidden" name="seccion" value="${item.seccion}" />

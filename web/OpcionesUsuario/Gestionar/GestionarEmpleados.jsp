@@ -105,7 +105,7 @@
                             </div>
 
                             <!-- Modificar -->
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEmpleado.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />
                                 <input type="hidden" name="ISSS_Empleado" value="${item.ISSS_Empleado}" />
@@ -120,7 +120,7 @@
                             </form>
 
                             <!-- Eliminar -->   
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEmpleado.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarEmpleado.jsp">
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="DUI_Empleado" value="${item.DUI_Empleado}" />
                                 <input type="hidden" name="ISSS_Empleado" value="${item.ISSS_Empleado}" />

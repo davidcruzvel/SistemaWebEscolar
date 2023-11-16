@@ -37,13 +37,13 @@
                         <td><c:out value="${item.nombreEspecialidad}" /></td>
                         <td><c:out value="${item.carrera}" /></td>     
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEspecialidad.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarEspecialidad.jsp">
                                 <input type="hidden" name="ID_Especialidad" value="${item.ID_Especialidad}" />
                                 <input type="hidden" name="nombreEspecialidad" value="${item.nombreEspecialidad}" />
                                 <input type="hidden" name="carrera" value="${item.carrera}" />
                                 <input type="submit" value="Modificar" />
                             </form>    
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEspecialidad.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarEspecialidad.jsp">
                                 <input type="hidden" name="ID_Especialidad" value="${item.ID_Especialidad}" />
                                 <input type="hidden" name="nombreEspecialidad" value="${item.nombreEspecialidad}" />
                                 <input type="hidden" name="carrera" value="${item.carrera}" />    

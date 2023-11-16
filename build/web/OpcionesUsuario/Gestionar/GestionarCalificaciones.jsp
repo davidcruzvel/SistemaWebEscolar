@@ -52,7 +52,7 @@
                         <td><c:out value="${item.promedio}" /></td>
                         <td><c:out value="${item.estado}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarCalificacion.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarCalificacion.jsp">
                                 <input type="hidden" name="ID_Calificacion" value="${item.ID_Calificacion}" />
                                 <input type="hidden" name="ID_Materia" value="${item.ID_Materia}" />
                                 <input type="hidden" name="nie" value="${item.nie}" />
@@ -66,7 +66,7 @@
                                 <input type="hidden" name="estado" value="${item.estado}" />
                                 <input type="submit" value="Modificar" />
                             </form>    
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarCalificacion.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarCalificacion.jsp">
                                 <input type="hidden" name="ID_Calificacion" value="${item.ID_Calificacion}" />
                                 <input type="hidden" name="ID_Materia" value="${item.ID_Materia}" />
                                 <input type="hidden" name="nie" value="${item.nie}" />

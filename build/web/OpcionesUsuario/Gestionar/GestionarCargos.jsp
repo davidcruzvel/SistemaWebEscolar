@@ -35,12 +35,12 @@
                         <td><c:out value="${item.ID_Cargo}" /></td>
                         <td><c:out value="${item.cargo}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarCargo.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarCargo.jsp">
                                 <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
                                 <input type="hidden" name="cargo" value="${item.cargo}" />             
                                 <input type="submit" value="Modificar" />
                             </form>    
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarCargo.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarCargo.jsp">
                                 <input type="hidden" name="ID_Cargo" value="${item.ID_Cargo}" />
                                 <input type="hidden" name="cargo" value="${item.cargo}" />             
                                 <input type="submit" value="Eliminar" />

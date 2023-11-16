@@ -36,13 +36,13 @@
                         <td><c:out value="${item.nie}" /></td>
                         <td><c:out value="${item.ID_Grupo}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarMatricula.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarMatricula.jsp">
                                 <input type="hidden" name="ID_Matricula" value="${item.ID_Matricula}" />
                                 <input type="hidden" name="nie" value="${item.nie}" />             
                                 <input type="hidden" name="ID_Grupo" value="${item.ID_Grupo}" />             
                                 <input type="submit" value="Modificar" />
                             </form>    
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarMatricula.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarMatricula.jsp">
                                 <input type="hidden" name="ID_Matricula" value="${item.ID_Matricula}" />
                                 <input type="hidden" name="nie" value="${item.nie}" />             
                                 <input type="hidden" name="ID_Grupo" value="${item.ID_Grupo}" />  

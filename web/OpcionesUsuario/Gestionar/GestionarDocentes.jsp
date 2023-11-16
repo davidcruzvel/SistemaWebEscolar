@@ -96,7 +96,7 @@
                             </div>
 
                             <!-- Modificar -->
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarDocente.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarDocente.jsp">
                                 <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="ID_Especialidad" value="${item.ID_Especialidad}" />
@@ -105,7 +105,7 @@
                             </form>
 
                             <!-- Eliminar -->
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarDocente.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarDocente.jsp">
                                 <input type="hidden" name="ID_Docente" value="${item.ID_Docente}" />
                                 <input type="hidden" name="ID_Empleado" value="${item.ID_Empleado}" />
                                 <input type="hidden" name="escalafon" value="${item.escalafon}" />

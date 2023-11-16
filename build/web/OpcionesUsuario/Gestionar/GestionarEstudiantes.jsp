@@ -45,7 +45,7 @@
                         <td><c:out value="${item.ID_Encargado}" /></td>
                         <td><c:out value="${item.ID_Direccion}" /></td>
                         <td>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/ModificarEstudiante.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Modificar/ModificarEstudiante.jsp">
                                 <input type="hidden" name="nie" value="${item.nie}" />
                                 <input type="hidden" name="nombresEstudiante" value="${item.nombresEstudiante}" />
                                 <input type="hidden" name="apellidosEstudiante" value="${item.apellidosEstudiante}" />
@@ -56,7 +56,7 @@
                                 <input type="hidden" name="ID_Direccion" value="${item.ID_Direccion}" />
                                 <input type="submit" value="Modificar" />
                             </form>
-                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/EliminarEstudiante.jsp">
+                            <form method="POST" action="/SistemaWebEscolar/OpcionesUsuario/Eliminar/EliminarEstudiante.jsp">
                                 <input type="hidden" name="nie" value="${item.nie}" />
                                 <input type="hidden" name="nombresEstudiante" value="${item.nombresEstudiante}" />
                                 <input type="hidden" name="apellidosEstudiante" value="${item.apellidosEstudiante}" />
