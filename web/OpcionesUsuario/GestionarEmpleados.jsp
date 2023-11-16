@@ -59,6 +59,7 @@
             <tbody>
                 <c:forEach items="${listaEmpleados}" var="item">
                     <tr>
+                        <!-- Mostrar -->
                         <!-- <td><c:out value="${item.ID_Empleado}" /></td> -->
                         <td><c:out value="${item.DUI_Empleado}" /></td>
                         <!-- <td><c:out value="${item.ISSS_Empleado}" /></td> -->

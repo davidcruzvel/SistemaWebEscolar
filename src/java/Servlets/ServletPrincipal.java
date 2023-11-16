@@ -199,7 +199,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Docentes";
+                String sqlQuery = "select * from VistaDocentes";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelDocentes> listaDocentes = new ArrayList<>();
@@ -207,7 +207,11 @@ public class ServletPrincipal extends HttpServlet {
                     ViewModelDocentes docente = new ViewModelDocentes();
                     docente.setID_Docente(rs.getInt("ID_Docente"));
                     docente.setID_Empleado(rs.getInt("ID_Empleado"));
+                    docente.setNombresEmpleado(rs.getString("nombresEmpleado"));
+                    docente.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
                     docente.setID_Especialidad(rs.getInt("ID_Especialidad"));
+                    docente.setNombreEspecialidad(rs.getString("nombreEspecialidad"));
+                    docente.setCarrera(rs.getString("carrera"));
                     docente.setEscalafon(rs.getString("escalafon"));
                     listaDocentes.add(docente);
                 }
