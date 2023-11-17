@@ -22,8 +22,11 @@
                 <label>Sección: ${param.seccion}</label><br>
                 <label>Año: ${param.anio}</label><br>
                 <label>ID Turno: ${param.ID_Turno}</label><br>
+                <label>Turno: ${param.turno}</label><br>
                 <label>ID Aula: ${param.ID_Aula}</label><br>
-                <label>ID Docente ${param.ID_Docente}</label><br>
+                <label>Aula: ${param.aula}</label><br>
+                <label>ID Docente: ${param.ID_Docente}</label><br>
+                <label>Docente Guía: ${param.docenteGuia}</label><br>
                 <input type="hidden" name="ID_Grupo" id="ID_Grupo" value="${param.ID_Grupo}" /><br><br>
                 <input type="submit" value="Eliminar" onclick="return confirm('¿Desea eliminar el grupo?')" /><br><br>
             </div>

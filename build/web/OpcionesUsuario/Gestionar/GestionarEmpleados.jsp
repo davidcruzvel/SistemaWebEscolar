@@ -49,6 +49,7 @@
         <table border="1">
             <thead>
                 <tr>
+                    <th>ID_Empleado</th>
                     <th>DUI</th>
                     <th>Nombres</th>
                     <th>Apellidos</th>
@@ -60,7 +61,7 @@
                 <c:forEach items="${listaEmpleados}" var="item">
                     <tr>
                         <!-- Mostrar -->
-                        <!-- <td><c:out value="${item.ID_Empleado}" /></td> -->
+                        <td><c:out value="${item.ID_Empleado}" /></td>
                         <td><c:out value="${item.DUI_Empleado}" /></td>
                         <!-- <td><c:out value="${item.ISSS_Empleado}" /></td> -->
                         <td><c:out value="${item.nombresEmpleado}" /></td>

@@ -42,18 +42,38 @@ go
 -- Vista de Docentes
 create view VistaDocentes as
 select 
-    EMP.ID_Empleado,
     DOC.ID_Docente,
+    EMP.ID_Empleado,
     EMP.NombresEmpleado,
     EMP.ApellidosEmpleado,
 	ESP.ID_Especialidad,
     ESP.NombreEspecialidad,
     ESP.Carrera,
-	DOC.Escalafon
+	DOC.Escalafon	
 from 
     Empleados EMP
     inner join Docentes DOC on EMP.ID_Empleado = DOC.ID_Empleado
     inner join Especialidades ESP on DOC.ID_Especialidad = ESP.ID_Especialidad;
+go
+-- Vista de Grupos
+create view VistaGrupos as
+select 
+	GRU.ID_Grupo,
+	GRU.Grado,
+	GRU.Seccion,
+	GRU.Anio,
+	GRU.ID_Turno,
+	TUR.Turno,
+	GRU.ID_Aula,
+	AUL.Edificio + AUL.Piso + AUL.NumeroAula as Aula,
+	GRU.ID_Docente,
+	DOC.NombresEmpleado + ' ' + DOC.ApellidosEmpleado as DocenteGuia
+from 
+	Grupos GRU
+	inner join Turnos TUR on GRU.ID_Turno = TUR.ID_Turno
+	inner join Aulas AUL on GRU.ID_Aula = AUL.ID_Aula
+	inner join VistaDocentes DOC on GRU.ID_Docente = DOC.ID_Docente;
+
 
 -- Consulta que permite saber las vistas almacenadas
 select * from INFORMATION_SCHEMA.VIEWS 
@@ -63,3 +83,4 @@ where TABLE_SCHEMA = 'dbo';
 select * from VistaDireccionCompleta;
 select * from VistaEmpleados;
 select * from VistaDocentes;
+select * from VistaGrupos;

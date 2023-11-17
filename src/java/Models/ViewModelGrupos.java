@@ -15,8 +15,11 @@ public class ViewModelGrupos {
     private String seccion;
     private int anio;
     private int ID_Turno;
+    private String turno;
     private int ID_Aula;
+    private String aula;
     private int ID_Docente;
+    private String docenteGuia;
 
     /**
      * @return the ID_Grupo
@@ -89,6 +92,20 @@ public class ViewModelGrupos {
     }
 
     /**
+     * @return the turno
+     */
+    public String getTurno() {
+        return turno;
+    }
+
+    /**
+     * @param turno the turno to set
+     */
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    /**
      * @return the ID_Aula
      */
     public int getID_Aula() {
@@ -103,6 +120,20 @@ public class ViewModelGrupos {
     }
 
     /**
+     * @return the aula
+     */
+    public String getAula() {
+        return aula;
+    }
+
+    /**
+     * @param aula the aula to set
+     */
+    public void setAula(String aula) {
+        this.aula = aula;
+    }
+
+    /**
      * @return the ID_Docente
      */
     public int getID_Docente() {
@@ -114,6 +145,20 @@ public class ViewModelGrupos {
      */
     public void setID_Docente(int ID_Docente) {
         this.ID_Docente = ID_Docente;
+    }
+
+    /**
+     * @return the docenteGuia
+     */
+    public String getDocenteGuia() {
+        return docenteGuia;
+    }
+
+    /**
+     * @param docenteGuia the docenteGuia to set
+     */
+    public void setDocenteGuia(String docenteGuia) {
+        this.docenteGuia = docenteGuia;
     }
 
 }

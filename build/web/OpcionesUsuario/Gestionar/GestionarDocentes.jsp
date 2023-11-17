@@ -48,7 +48,7 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>Escalafón</th> 
+                    <th>ID_Docente</th> 
                     <th>Nombres</th> 
                     <th>Apellidos</th>
                     <th>Especialidad</th>
@@ -59,39 +59,39 @@
                 <c:forEach items="${listaDocentes}" var="item">
                     <tr>
                         <!-- Mostrar -->
-                        <td><c:out value="${item.escalafon}" /></td>                        
+                        <td><c:out value="${item.ID_Docente}" /></td>
+                        <!-- <td><c:out value="${item.ID_Empleado}" /></td> -->
                         <td><c:out value="${item.nombresEmpleado}" /></td>
                         <td><c:out value="${item.apellidosEmpleado}" /></td>                        
-                        <td><c:out value="${item.nombreEspecialidad}" /></td>                          
-                        <!-- <td><c:out value="${item.ID_Docente}" /></td> -->
-                        <!-- <td><c:out value="${item.ID_Empleado}" /></td> -->
                         <!-- <td><c:out value="${item.ID_Especialidad}" /></td> -->
+                        <td><c:out value="${item.nombreEspecialidad}" /></td>                          
                         <!-- <td><c:out value="${item.carrera}" /></td> -->
+                        <!-- <td><c:out value="${item.escalafon}" /></td> -->
                         <td>
                             <!-- Ver detalles -->
                             <button class="open-popup-btn" 
-                                    onclick="mostrarDetallesDocente(
-                                                    '${item.escalafon}',
+                                    onclick="mostrarDetallesDocente(                                                    
                                                     '${item.ID_Docente}',
                                                     '${item.ID_Empleado}',
                                                     '${item.nombresEmpleado}',
                                                     '${item.apellidosEmpleado}',
                                                     '${item.ID_Especialidad}',
                                                     '${item.nombreEspecialidad}',
-                                                    '${item.carrera}'
+                                                    '${item.carrera}',
+                                                    '${item.escalafon}'
                                                     )">Ver detalles
                             </button>
                             <!-- Contenedor del pop-up -->
                             <div class="overlay" id="overlay"></div>
                             <div class="popup-container" id="popup">
-                                <label>Escalafón: <span id="escalafon"></span></label><br>
                                 <label>ID Docente: <span id="ID_Docente"></span></label><br>
                                 <label>ID Empleado: <span id="ID_Empleado"></span></label><br>
                                 <label>Nombres: <span id="nombresEmpleado"></span></label><br>
                                 <label>Apellidos: <span id="apellidosEmpleado"></span></label><br>
                                 <label>ID Especialidad: <span id="ID_Especialidad"></span></label><br>
                                 <label>Especialidad: <span id="nombreEspecialidad"></span></label><br>
-                                <label>Carrera: <span id="carrera"></span></label><br><br>
+                                <label>Carrera: <span id="carrera"></span></label><br>
+                                <label>Escalafón: <span id="escalafon"></span></label><br><br>
                                 <button onclick="abrirPopup()">Cerrar</button>
                             </div>
 
@@ -136,8 +136,7 @@
             }
         }
 
-        function mostrarDetallesDocente(escalafon, ID_Docente, ID_Empleado, nombresEmpleado, apellidosEmpleado, ID_Especialidad, nombreEspecialidad, carrera) {
-            document.getElementById('escalafon').textContent = escalafon;
+        function mostrarDetallesDocente(ID_Docente, ID_Empleado, nombresEmpleado, apellidosEmpleado, ID_Especialidad, nombreEspecialidad, carrera, escalafon) {            
             document.getElementById('ID_Docente').textContent = ID_Docente;
             document.getElementById('ID_Empleado').textContent = ID_Empleado;
             document.getElementById('nombresEmpleado').textContent = nombresEmpleado;
@@ -145,6 +144,7 @@
             document.getElementById('ID_Especialidad').textContent = ID_Especialidad;
             document.getElementById('nombreEspecialidad').textContent = nombreEspecialidad;
             document.getElementById('carrera').textContent = carrera;
+            document.getElementById('escalafon').textContent = escalafon;
 
             // Muestra el pop-up
             abrirPopup();

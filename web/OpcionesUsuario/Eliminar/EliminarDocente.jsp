@@ -17,7 +17,6 @@
 
         <form method="POST" action="/SistemaWebEscolar/ServletPrincipal?accion=EliminarDocente">
             <div>                
-                <label>Escalafón: ${param.escalafon}</label><br>
                 <label>ID Docente: ${param.ID_Docente}</label><br>
                 <label>ID Empleado: ${param.ID_Empleado}</label><br>
                 <label>Nombres: ${param.nombresEmpleado}</label><br>
@@ -25,6 +24,7 @@
                 <label>ID Especialidad: ${param.ID_Especialidad}</label><br>
                 <label>Especialidad: ${param.nombreEspecialidad}</label><br>
                 <label>Carrera: ${param.carrera}</label><br>  
+                <label>Escalafón: ${param.escalafon}</label><br>
                 <input type="hidden" name="ID_Docente" id="ID_Docente" value="${param.ID_Docente}" /><br><br>
                 <input type="submit" value="Eliminar" onclick="return confirm('¿Desea eliminar el docente?')" /><br><br>
             </div>

@@ -230,7 +230,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Grupos";
+                String sqlQuery = "select * from VistaGrupos";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelGrupos> listaGrupos = new ArrayList<>();
@@ -241,9 +241,12 @@ public class ServletPrincipal extends HttpServlet {
                     grupo.setSeccion(rs.getString("seccion"));
                     grupo.setAnio(rs.getInt("anio"));
                     grupo.setID_Turno(rs.getInt("ID_Turno"));
+                    grupo.setTurno(rs.getString("turno"));
                     grupo.setID_Aula(rs.getInt("ID_Aula"));
+                    grupo.setAula(rs.getString("aula"));
                     grupo.setID_Docente(rs.getInt("ID_Docente"));
-                    listaGrupos.add(grupo);
+                    grupo.setDocenteGuia(rs.getString("docenteGuia"));
+                    listaGrupos.add(grupo);                    
                 }
                 request.setAttribute("listaGrupos", listaGrupos);
 
@@ -697,7 +700,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void agregarMateria(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         //El ID de las materias es autoincrementable
@@ -722,7 +725,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     //Funciones de modificacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
@@ -1051,7 +1054,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void modificarMateria(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         String ID_Materia = request.getParameter("ID_Materia");
@@ -1079,7 +1082,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -1269,7 +1272,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void eliminarMateria(HttpServletRequest request, HttpServletResponse response) {
         String ID_Materia = request.getParameter("ID_Materia");
         try {
@@ -1290,7 +1293,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
