@@ -12,7 +12,11 @@ public class ViewModelDocentes {
 
     private int ID_Docente;
     private int ID_Empleado;
+    private String nombresEmpleado;
+    private String apellidosEmpleado;
     private int ID_Especialidad;
+    private String nombreEspecialidad;
+    private String carrera;
     private String escalafon;
 
     /**
@@ -44,6 +48,34 @@ public class ViewModelDocentes {
     }
 
     /**
+     * @return the nombresEmpleado
+     */
+    public String getNombresEmpleado() {
+        return nombresEmpleado;
+    }
+
+    /**
+     * @param nombresEmpleado the nombresEmpleado to set
+     */
+    public void setNombresEmpleado(String nombresEmpleado) {
+        this.nombresEmpleado = nombresEmpleado;
+    }
+
+    /**
+     * @return the apellidosEmpleado
+     */
+    public String getApellidosEmpleado() {
+        return apellidosEmpleado;
+    }
+
+    /**
+     * @param apellidosEmpleado the apellidosEmpleado to set
+     */
+    public void setApellidosEmpleado(String apellidosEmpleado) {
+        this.apellidosEmpleado = apellidosEmpleado;
+    }
+
+    /**
      * @return the ID_Especialidad
      */
     public int getID_Especialidad() {
@@ -55,6 +87,34 @@ public class ViewModelDocentes {
      */
     public void setID_Especialidad(int ID_Especialidad) {
         this.ID_Especialidad = ID_Especialidad;
+    }
+
+    /**
+     * @return the nombreEspecialidad
+     */
+    public String getNombreEspecialidad() {
+        return nombreEspecialidad;
+    }
+
+    /**
+     * @param nombreEspecialidad the nombreEspecialidad to set
+     */
+    public void setNombreEspecialidad(String nombreEspecialidad) {
+        this.nombreEspecialidad = nombreEspecialidad;
+    }
+
+    /**
+     * @return the carrera
+     */
+    public String getCarrera() {
+        return carrera;
+    }
+
+    /**
+     * @param carrera the carrera to set
+     */
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 
     /**

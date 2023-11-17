@@ -151,13 +151,13 @@ public class ServletPrincipal extends HttpServlet {
                     empleado.setFechaNacEmpleado(rs.getDate("fechaNacEmpleado"));
                     empleado.setTelefonoEmpleado(rs.getString("telefonoEmpleado"));
                     empleado.setCorreo(rs.getString("correo"));
+                    empleado.setID_Cargo(rs.getInt("ID_Cargo"));
                     empleado.setCargo(rs.getString("cargo"));
-                    //empleado.setID_Cargo(rs.getInt("ID_Cargo"));
                     empleado.setID_Direccion(rs.getInt("ID_Direccion"));
+                    empleado.setDireccionCompleta(rs.getString("direccionCompleta"));
                     listaEmpleados.add(empleado);
                 }
                 request.setAttribute("listaEmpleados", listaEmpleados);
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
             request.setAttribute("mensaje_conexion", ex.getMessage());
@@ -199,7 +199,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Docentes";
+                String sqlQuery = "select * from VistaDocentes";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelDocentes> listaDocentes = new ArrayList<>();
@@ -207,7 +207,11 @@ public class ServletPrincipal extends HttpServlet {
                     ViewModelDocentes docente = new ViewModelDocentes();
                     docente.setID_Docente(rs.getInt("ID_Docente"));
                     docente.setID_Empleado(rs.getInt("ID_Empleado"));
+                    docente.setNombresEmpleado(rs.getString("nombresEmpleado"));
+                    docente.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
                     docente.setID_Especialidad(rs.getInt("ID_Especialidad"));
+                    docente.setNombreEspecialidad(rs.getString("nombreEspecialidad"));
+                    docente.setCarrera(rs.getString("carrera"));
                     docente.setEscalafon(rs.getString("escalafon"));
                     listaDocentes.add(docente);
                 }
@@ -226,7 +230,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Grupos";
+                String sqlQuery = "select * from VistaGrupos";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelGrupos> listaGrupos = new ArrayList<>();
@@ -237,9 +241,12 @@ public class ServletPrincipal extends HttpServlet {
                     grupo.setSeccion(rs.getString("seccion"));
                     grupo.setAnio(rs.getInt("anio"));
                     grupo.setID_Turno(rs.getInt("ID_Turno"));
+                    grupo.setTurno(rs.getString("turno"));
                     grupo.setID_Aula(rs.getInt("ID_Aula"));
+                    grupo.setAula(rs.getString("aula"));
                     grupo.setID_Docente(rs.getInt("ID_Docente"));
-                    listaGrupos.add(grupo);
+                    grupo.setDocenteGuia(rs.getString("docenteGuia"));
+                    listaGrupos.add(grupo);                    
                 }
                 request.setAttribute("listaGrupos", listaGrupos);
 
@@ -256,7 +263,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Encargados";
+                String sqlQuery = "select * from VistaEncargados";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelEncargados> listaEncargados = new ArrayList<>();
@@ -268,10 +275,10 @@ public class ServletPrincipal extends HttpServlet {
                     encargado.setTelefonoEncargado(rs.getString("telefonoEncargado"));
                     encargado.setDUI_Encargado(rs.getString("DUI_Encargado"));
                     encargado.setID_Direccion(rs.getInt("ID_Direccion"));
+                    encargado.setDireccionCompleta(rs.getString("direccionCompleta"));
                     listaEncargados.add(encargado);
                 }
                 request.setAttribute("listaEncargados", listaEncargados);
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
             request.setAttribute("mensaje_conexion", ex.getMessage());
@@ -285,7 +292,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Estudiantes";
+                String sqlQuery = "select * from VistaEstudiantes";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelEstudiantes> listaEstudiantes = new ArrayList<>();
@@ -298,11 +305,18 @@ public class ServletPrincipal extends HttpServlet {
                     estudiante.setGeneroEstudiante(rs.getString("generoEstudiante"));
                     estudiante.setTelefonoEstudiante(rs.getString("telefonoEstudiante"));
                     estudiante.setID_Encargado(rs.getInt("ID_Encargado"));
+                    estudiante.setNombresEncargado(rs.getString("nombresEncargado"));
+                    estudiante.setApellidosEncargado(rs.getString("apellidosEncargado"));
                     estudiante.setID_Direccion(rs.getInt("ID_Direccion"));
+                    estudiante.setDireccionCompleta(rs.getString("direccionCompleta"));
+                    estudiante.setID_Matricula(rs.getInt("ID_Matricula"));
+                    estudiante.setGrado(rs.getString("grado"));
+                    estudiante.setSeccion(rs.getString("seccion"));
+                    estudiante.setAnio(rs.getInt("anio"));
+                    estudiante.setAula(rs.getString("aula"));
                     listaEstudiantes.add(estudiante);
                 }
                 request.setAttribute("listaEstudiantes", listaEstudiantes);
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
             request.setAttribute("mensaje_conexion", ex.getMessage());
@@ -367,7 +381,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Calificaciones";
+                String sqlQuery = "select * from VistaCalificaciones";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelCalificaciones> listaCalificaciones = new ArrayList<>();
@@ -375,8 +389,10 @@ public class ServletPrincipal extends HttpServlet {
                     ViewModelCalificaciones calificacion = new ViewModelCalificaciones();
                     calificacion.setID_Calificacion(rs.getInt("ID_Calificacion"));
                     calificacion.setID_Materia(rs.getInt("ID_Materia"));
+                    calificacion.setNombreMateria(rs.getString("nombreMateria"));
                     calificacion.setNie(rs.getInt("nie"));
-                    calificacion.setID_Docente(rs.getInt("ID_Docente"));
+                    calificacion.setNombresEstudiante(rs.getString("nombresEstudiante"));
+                    calificacion.setApellidosEstudiante(rs.getString("apellidosEstudiante"));                    
                     calificacion.setExamen1(rs.getDouble("examen1"));
                     calificacion.setExamen2(rs.getDouble("examen2"));
                     calificacion.setExamen3(rs.getDouble("examen3"));
@@ -384,6 +400,9 @@ public class ServletPrincipal extends HttpServlet {
                     calificacion.setTareas(rs.getDouble("tareas"));
                     calificacion.setPromedio(rs.getDouble("promedio"));
                     calificacion.setEstado(rs.getString("estado"));
+                    calificacion.setID_Docente(rs.getInt("ID_Docente"));
+                    calificacion.setNombresEmpleado(rs.getString("nombresEmpleado"));
+                    calificacion.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
                     listaCalificaciones.add(calificacion);
                 }
                 request.setAttribute("listaCalificaciones", listaCalificaciones);
@@ -693,7 +712,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void agregarMateria(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         //El ID de las materias es autoincrementable
@@ -718,8 +737,8 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
-    //Funciones de actualizacion de registros (UPDATE)
+
+    //Funciones de modificacion de registros (UPDATE)
     public void modificarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -1047,7 +1066,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void modificarMateria(HttpServletRequest request, HttpServletResponse response) {
         //CAPTURA DE VARIABLES
         String ID_Materia = request.getParameter("ID_Materia");
@@ -1075,7 +1094,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     //Funciones de eliminacion de registros (DELETE)
     public void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response) {
         String ID_Empleado = request.getParameter("ID_Empleado");
@@ -1265,7 +1284,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     public void eliminarMateria(HttpServletRequest request, HttpServletResponse response) {
         String ID_Materia = request.getParameter("ID_Materia");
         try {
@@ -1286,7 +1305,7 @@ public class ServletPrincipal extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    
+
     //Metodos doGet y doPost
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -1309,97 +1328,97 @@ public class ServletPrincipal extends HttpServlet {
             request.getRequestDispatcher("/Login.jsp").forward(request, response);
         } else if (accion.equals("GestionarCargos")) {
             mostrarCargos(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarCargos.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarCargos.jsp").forward(request, response);
         } else if (accion.equals("GestionarEmpleados")) {
             mostrarEmpleados(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEmpleados.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEmpleados.jsp").forward(request, response);
         } else if (accion.equals("GestionarEspecialidades")) {
             mostrarEspecialidades(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEspecialidades.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEspecialidades.jsp").forward(request, response);
         } else if (accion.equals("GestionarUsuarios")) {
             mostrarUsuarios(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarUsuarios.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarUsuarios.jsp").forward(request, response);
         } else if (accion.equals("GestionarDocentes")) {
             mostrarDocentes(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarDocentes.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarDocentes.jsp").forward(request, response);
         } else if (accion.equals("GestionarGrupos")) {
             mostrarGrupos(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarGrupos.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarGrupos.jsp").forward(request, response);
         } else if (accion.equals("GestionarEncargados")) {
             mostrarEncargados(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEncargados.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEncargados.jsp").forward(request, response);
         } else if (accion.equals("GestionarEstudiantes")) {
             mostrarEstudiantes(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarEstudiantes.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarEstudiantes.jsp").forward(request, response);
         } else if (accion.equals("GestionarMatriculas")) {
             mostrarMatriculas(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarMatriculas.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarMatriculas.jsp").forward(request, response);
         } else if (accion.equals("GestionarMaterias")) {
             mostrarMaterias(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarMaterias.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarMaterias.jsp").forward(request, response);
         } else if (accion.equals("GestionarCalificaciones")) {
             mostrarCalificaciones(request, response);
-            request.getRequestDispatcher("OpcionesUsuario/GestionarCalificaciones.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Gestionar/GestionarCalificaciones.jsp").forward(request, response);
         } else if (accion.equals("AgregarEmpleado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEmpleado.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEmpleado.jsp").forward(request, response);
         } else if (accion.equals("AgregarCalificacion")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarCalificacion.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarCalificacion.jsp").forward(request, response);
         } else if (accion.equals("AgregarCargo")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarCargo.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarCargo.jsp").forward(request, response);
         } else if (accion.equals("AgregarEspecialidad")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEspecialidad.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEspecialidad.jsp").forward(request, response);
         } else if (accion.equals("AgregarDocente")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarDocente.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarDocente.jsp").forward(request, response);
         } else if (accion.equals("AgregarGrupo")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarGrupo.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarGrupo.jsp").forward(request, response);
         } else if (accion.equals("AgregarEncargado")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEncargado.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEncargado.jsp").forward(request, response);
         } else if (accion.equals("AgregarEstudiante")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarEstudiante.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarEstudiante.jsp").forward(request, response);
         } else if (accion.equals("AgregarMatricula")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarMatricula.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarMatricula.jsp").forward(request, response);
         } else if (accion.equals("AgregarMateria")) {
             if (request.getSession().getAttribute("exito") != null) {
                 request.setAttribute("exito", request.getSession().getAttribute("exito"));
                 request.getSession().removeAttribute("exito");
             }
-            request.getRequestDispatcher("OpcionesUsuario/AgregarMateria.jsp").forward(request, response);
+            request.getRequestDispatcher("OpcionesUsuario/Agregar/AgregarMateria.jsp").forward(request, response);
         }
 
     }

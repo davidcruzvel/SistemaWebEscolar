@@ -16,6 +16,7 @@ public class ViewModelEncargados {
     private String telefonoEncargado;
     private String DUI_Encargado;
     private int ID_Direccion;
+    private String direccionCompleta;
 
     /**
      * @return the ID_Encargado
@@ -99,6 +100,20 @@ public class ViewModelEncargados {
      */
     public void setID_Direccion(int ID_Direccion) {
         this.ID_Direccion = ID_Direccion;
+    }
+
+    /**
+     * @return the direccionCompleta
+     */
+    public String getDireccionCompleta() {
+        return direccionCompleta;
+    }
+
+    /**
+     * @param direccionCompleta the direccionCompleta to set
+     */
+    public void setDireccionCompleta(String direccionCompleta) {
+        this.direccionCompleta = direccionCompleta;
     }
 
 }

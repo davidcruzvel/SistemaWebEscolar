@@ -29,7 +29,7 @@ create table Direcciones(
     Linea1 varchar(100) not null,
     Linea2 varchar(100),
     ID_Distrito varchar(5) not null,
-    CodigoPostal int,
+    CodigoPostal char(5),
 );
 
 -- EMPLEADOS

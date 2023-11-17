@@ -11,27 +11,22 @@
 
 <!DOCTYPE html>
 <html>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Login Sistema Escolar</title>
-
-    <body>
-        <form method="POST" action="/SistemaWebEscolar/ServletPrincipal?accion=Login" id="formLogin">
-            <div id="resultLogin"></div>    
-            <div><h1>Sistema Escolar 1.0</h1></div>           
-            <%-- Crear objeto de la clase Date y formatear la fecha --%>
-            <c:set var="fechaActual" value="<%= new java.util.Date() %>" />
-            <c:set var="formatoFecha" value="dd/MM/YYYY" />         
-            <%-- Imprimir fecha --%>            
-            <div><label><strong>
-                <c:out value="Fecha actual: "/>
-                <fmt:formatDate value='${fechaActual}' pattern='${formatoFecha}' />
-            </strong></label></div><br>
-            <div><label>Usuario:</label></div>            
-            <div><input type="text" name="tfUsuario" id="idtfUsuario"></div><br>
-            <div><label>Contrase&ntilde;a:</label></div>
-            <div><input type="password" name="tfContrasenia" id="idtfContrasenia" ></div><br>
-            <div><input type="submit" value="Iniciar Sesi&oacute;n"></div>
-        </form>    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login Sistema Escolar</title>
+        <link rel="stylesheet" href="Recursos/css/bootstrap.css"/>
+    </head>
+    <body>      
+        <div class="header1"><h1>Sistema Escolar 1.0</h1></div>           
+        <div class="container1">
+            <form class="form-group" method="POST" action="/SistemaWebEscolar/ServletPrincipal?accion=Login" id="formLogin">
+                <div id="resultLogin"></div>
+                <div><label>Usuario:</label></div>            
+                <div><input class="form-control" type="text" name="tfUsuario" id="idtfUsuario"></div><br>
+                <div><label>Contrase&ntilde;a:</label></div>
+                <div><input class="form-control" type="password" name="tfContrasenia" id="idtfContrasenia" ></div><br>
+                <div><input class="btn btn-primary" type="submit" value="Iniciar Sesi&oacute;n"></div>
+            </form>    
+        </div>        
     </body>
 </html>
