@@ -19,7 +19,15 @@ public class ViewModelEstudiantes {
     private String generoEstudiante;
     private String telefonoEstudiante;
     private int ID_Encargado;
+    private String nombresEncargado;
+    private String apellidosEncargado;
     private int ID_Direccion;
+    private String direccionCompleta;
+    private int ID_Matricula;
+    private String grado;
+    private String seccion;
+    private int anio;
+    private String aula;
 
     /**
      * @return the nie
@@ -120,6 +128,34 @@ public class ViewModelEstudiantes {
     }
 
     /**
+     * @return the nombresEncargado
+     */
+    public String getNombresEncargado() {
+        return nombresEncargado;
+    }
+
+    /**
+     * @param nombresEncargado the nombresEncargado to set
+     */
+    public void setNombresEncargado(String nombresEncargado) {
+        this.nombresEncargado = nombresEncargado;
+    }
+
+    /**
+     * @return the apellidosEncargado
+     */
+    public String getApellidosEncargado() {
+        return apellidosEncargado;
+    }
+
+    /**
+     * @param apellidosEncargado the apellidosEncargado to set
+     */
+    public void setApellidosEncargado(String apellidosEncargado) {
+        this.apellidosEncargado = apellidosEncargado;
+    }
+
+    /**
      * @return the ID_Direccion
      */
     public int getID_Direccion() {
@@ -131,6 +167,90 @@ public class ViewModelEstudiantes {
      */
     public void setID_Direccion(int ID_Direccion) {
         this.ID_Direccion = ID_Direccion;
+    }
+
+    /**
+     * @return the direccionCompleta
+     */
+    public String getDireccionCompleta() {
+        return direccionCompleta;
+    }
+
+    /**
+     * @param direccionCompleta the direccionCompleta to set
+     */
+    public void setDireccionCompleta(String direccionCompleta) {
+        this.direccionCompleta = direccionCompleta;
+    }
+
+    /**
+     * @return the ID_Matricula
+     */
+    public int getID_Matricula() {
+        return ID_Matricula;
+    }
+
+    /**
+     * @param ID_Matricula the ID_Matricula to set
+     */
+    public void setID_Matricula(int ID_Matricula) {
+        this.ID_Matricula = ID_Matricula;
+    }
+
+    /**
+     * @return the grado
+     */
+    public String getGrado() {
+        return grado;
+    }
+
+    /**
+     * @param grado the grado to set
+     */
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
+
+    /**
+     * @return the seccion
+     */
+    public String getSeccion() {
+        return seccion;
+    }
+
+    /**
+     * @param seccion the seccion to set
+     */
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
+    }
+
+    /**
+     * @return the anio
+     */
+    public int getAnio() {
+        return anio;
+    }
+
+    /**
+     * @param anio the anio to set
+     */
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    /**
+     * @return the aula
+     */
+    public String getAula() {
+        return aula;
+    }
+
+    /**
+     * @param aula the aula to set
+     */
+    public void setAula(String aula) {
+        this.aula = aula;
     }
 
 }

@@ -18,13 +18,21 @@
         <form method="POST" action="/SistemaWebEscolar/ServletPrincipal?accion=EliminarEstudiante">
             <div>
                 <label>NIE: ${param.nie}</label><br>
-                <label>Nombres: ${param.nombresEstudiante}</label><br>
-                <label>Apellidos: ${param.apellidosEstudiante}</label><br>
+                <label>Nombres Estudiante: ${param.nombresEstudiante}</label><br>
+                <label>Apellidos Estudiante: ${param.apellidosEstudiante}</label><br>
                 <label>Fecha de nacimiento: ${param.fechaNacEstudiante}</label><br>
                 <label>Género: ${param.generoEstudiante}</label><br>
                 <label>Teléfono: ${param.telefonoEstudiante}</label><br>
                 <label>ID Encargado: ${param.ID_Encargado}</label><br>
-                <label>ID Dirección: ${param.ID_Direccion}</label>   
+                <label>Nombres Encargado: ${param.nombresEncargado}</label><br>
+                <label>Apellidos Encargado: ${param.apellidosEncargado}</label><br>
+                <label>ID Dirección: ${param.ID_Direccion}</label><br>
+                <label>Dirección: ${param.direccionCompleta}</label><br>
+                <label>ID Matrícula: ${param.ID_Matricula}</label><br>
+                <label>Grado: ${param.grado}</label><br>
+                <label>Sección: ${param.seccion}</label><br>
+                <label>Año: ${param.anio}</label><br>
+                <label>Aula: ${param.aula}</label><br>
                 <input type="hidden" name="nie" id="nie" value="${param.nie}" /><br><br>
                 <input type="submit" value="Eliminar" onclick="return confirm('¿Desea eliminar el estudiante?')" /><br><br>
             </div>

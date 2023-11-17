@@ -263,7 +263,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Encargados";
+                String sqlQuery = "select * from VistaEncargados";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelEncargados> listaEncargados = new ArrayList<>();
@@ -275,10 +275,10 @@ public class ServletPrincipal extends HttpServlet {
                     encargado.setTelefonoEncargado(rs.getString("telefonoEncargado"));
                     encargado.setDUI_Encargado(rs.getString("DUI_Encargado"));
                     encargado.setID_Direccion(rs.getInt("ID_Direccion"));
+                    encargado.setDireccionCompleta(rs.getString("direccionCompleta"));
                     listaEncargados.add(encargado);
                 }
                 request.setAttribute("listaEncargados", listaEncargados);
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
             request.setAttribute("mensaje_conexion", ex.getMessage());
@@ -292,7 +292,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Estudiantes";
+                String sqlQuery = "select * from VistaEstudiantes";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelEstudiantes> listaEstudiantes = new ArrayList<>();
@@ -305,11 +305,18 @@ public class ServletPrincipal extends HttpServlet {
                     estudiante.setGeneroEstudiante(rs.getString("generoEstudiante"));
                     estudiante.setTelefonoEstudiante(rs.getString("telefonoEstudiante"));
                     estudiante.setID_Encargado(rs.getInt("ID_Encargado"));
+                    estudiante.setNombresEncargado(rs.getString("nombresEncargado"));
+                    estudiante.setApellidosEncargado(rs.getString("apellidosEncargado"));
                     estudiante.setID_Direccion(rs.getInt("ID_Direccion"));
+                    estudiante.setDireccionCompleta(rs.getString("direccionCompleta"));
+                    estudiante.setID_Matricula(rs.getInt("ID_Matricula"));
+                    estudiante.setGrado(rs.getString("grado"));
+                    estudiante.setSeccion(rs.getString("seccion"));
+                    estudiante.setAnio(rs.getInt("anio"));
+                    estudiante.setAula(rs.getString("aula"));
                     listaEstudiantes.add(estudiante);
                 }
                 request.setAttribute("listaEstudiantes", listaEstudiantes);
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
             request.setAttribute("mensaje_conexion", ex.getMessage());

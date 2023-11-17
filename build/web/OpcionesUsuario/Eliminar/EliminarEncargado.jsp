@@ -22,6 +22,7 @@
                 <label>Apellidos: ${param.apellidosEncargado}</label><br>
                 <label>Teléfono: ${param.telefonoEncargado}</label><br>
                 <label>ID Dirección: ${param.ID_Direccion}</label><br>
+                <label>Dirección: ${param.direccionCompleta}</label><br>
                 <input type="hidden" name="ID_Encargado" id="ID_Encargado" value="${param.ID_Encargado}" /><br><br>
                 <input type="submit" value="Eliminar" onclick="return confirm('¿Desea eliminar el encargado?')" /><br><br>
             </div>
