@@ -381,7 +381,7 @@ public class ServletPrincipal extends HttpServlet {
 
             try (Connection conn = DriverManager.getConnection(url)) {
                 request.setAttribute("mensaje_conexion", "Ok!");
-                String sqlQuery = "select * from Calificaciones";
+                String sqlQuery = "select * from VistaCalificaciones";
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
                 ResultSet rs = pstmt.executeQuery();
                 ArrayList<ViewModelCalificaciones> listaCalificaciones = new ArrayList<>();
@@ -389,8 +389,10 @@ public class ServletPrincipal extends HttpServlet {
                     ViewModelCalificaciones calificacion = new ViewModelCalificaciones();
                     calificacion.setID_Calificacion(rs.getInt("ID_Calificacion"));
                     calificacion.setID_Materia(rs.getInt("ID_Materia"));
+                    calificacion.setNombreMateria(rs.getString("nombreMateria"));
                     calificacion.setNie(rs.getInt("nie"));
-                    calificacion.setID_Docente(rs.getInt("ID_Docente"));
+                    calificacion.setNombresEstudiante(rs.getString("nombresEstudiante"));
+                    calificacion.setApellidosEstudiante(rs.getString("apellidosEstudiante"));                    
                     calificacion.setExamen1(rs.getDouble("examen1"));
                     calificacion.setExamen2(rs.getDouble("examen2"));
                     calificacion.setExamen3(rs.getDouble("examen3"));
@@ -398,6 +400,9 @@ public class ServletPrincipal extends HttpServlet {
                     calificacion.setTareas(rs.getDouble("tareas"));
                     calificacion.setPromedio(rs.getDouble("promedio"));
                     calificacion.setEstado(rs.getString("estado"));
+                    calificacion.setID_Docente(rs.getInt("ID_Docente"));
+                    calificacion.setNombresEmpleado(rs.getString("nombresEmpleado"));
+                    calificacion.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
                     listaCalificaciones.add(calificacion);
                 }
                 request.setAttribute("listaCalificaciones", listaCalificaciones);

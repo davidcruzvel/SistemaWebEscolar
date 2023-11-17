@@ -12,8 +12,10 @@ public class ViewModelCalificaciones {
 
     private int ID_Calificacion;
     private int ID_Materia;
+    private String nombreMateria;
     private int nie;
-    private int ID_Docente;
+    private String nombresEstudiante;
+    private String apellidosEstudiante;
     private double examen1;
     private double examen2;
     private double examen3;
@@ -21,6 +23,9 @@ public class ViewModelCalificaciones {
     private double tareas;
     private double promedio;
     private String estado;
+    private int ID_Docente;
+    private String nombresEmpleado;
+    private String apellidosEmpleado;
 
     /**
      * @return the ID_Calificacion
@@ -51,6 +56,20 @@ public class ViewModelCalificaciones {
     }
 
     /**
+     * @return the nombreMateria
+     */
+    public String getNombreMateria() {
+        return nombreMateria;
+    }
+
+    /**
+     * @param nombreMateria the nombreMateria to set
+     */
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
+    }
+
+    /**
      * @return the nie
      */
     public int getNie() {
@@ -65,17 +84,31 @@ public class ViewModelCalificaciones {
     }
 
     /**
-     * @return the ID_Docente
+     * @return the nombresEstudiante
      */
-    public int getID_Docente() {
-        return ID_Docente;
+    public String getNombresEstudiante() {
+        return nombresEstudiante;
     }
 
     /**
-     * @param ID_Docente the ID_Docente to set
+     * @param nombresEstudiante the nombresEstudiante to set
      */
-    public void setID_Docente(int ID_Docente) {
-        this.ID_Docente = ID_Docente;
+    public void setNombresEstudiante(String nombresEstudiante) {
+        this.nombresEstudiante = nombresEstudiante;
+    }
+
+    /**
+     * @return the apellidosEstudiante
+     */
+    public String getApellidosEstudiante() {
+        return apellidosEstudiante;
+    }
+
+    /**
+     * @param apellidosEstudiante the apellidosEstudiante to set
+     */
+    public void setApellidosEstudiante(String apellidosEstudiante) {
+        this.apellidosEstudiante = apellidosEstudiante;
     }
 
     /**
@@ -174,6 +207,48 @@ public class ViewModelCalificaciones {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the ID_Docente
+     */
+    public int getID_Docente() {
+        return ID_Docente;
+    }
+
+    /**
+     * @param ID_Docente the ID_Docente to set
+     */
+    public void setID_Docente(int ID_Docente) {
+        this.ID_Docente = ID_Docente;
+    }
+
+    /**
+     * @return the nombresEmpleado
+     */
+    public String getNombresEmpleado() {
+        return nombresEmpleado;
+    }
+
+    /**
+     * @param nombresEmpleado the nombresEmpleado to set
+     */
+    public void setNombresEmpleado(String nombresEmpleado) {
+        this.nombresEmpleado = nombresEmpleado;
+    }
+
+    /**
+     * @return the apellidosEmpleado
+     */
+    public String getApellidosEmpleado() {
+        return apellidosEmpleado;
+    }
+
+    /**
+     * @param apellidosEmpleado the apellidosEmpleado to set
+     */
+    public void setApellidosEmpleado(String apellidosEmpleado) {
+        this.apellidosEmpleado = apellidosEmpleado;
     }
 
 }

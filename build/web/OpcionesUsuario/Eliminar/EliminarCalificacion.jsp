@@ -19,15 +19,20 @@
             <div>
                 <label>ID Calificación: ${param.ID_Calificacion}</label><br>
                 <label>ID Materia: ${param.ID_Materia}</label><br>
-                <label>NIE Estudiante: ${param.nie}</label><br>
-                <label>ID Docente: ${param.ID_Docente}</label><br>
+                <label>Materia: ${param.nombreMateria}</label><br>
+                <label>NIE: ${param.nie}</label><br>
+                <label>Nombres Estudiante: ${param.nombresEstudiante}</label><br>
+                <label>Apellidos Estudiante: ${param.apellidosEstudiante}</label><br>
                 <label>Examen 1: ${param.examen1}</label><br>
                 <label>Examen 2: ${param.examen2}</label><br>
                 <label>Examen 3: ${param.examen3}</label><br>
                 <label>Examen Final: ${param.examenFinal}</label><br>
                 <label>Tareas: ${param.tareas}</label><br>
-                <label>Promedio: ${param.promedio}</label>   
-                <label>Estado: ${param.estado}</label>   
+                <label>Promedio: ${param.promedio}</label><br>
+                <label>Estado: ${param.estado}</label><br>
+                <label>ID Docente: ${param.ID_Docente}</label><br>
+                <label>Nombres Docente: ${param.nombresEmpleado}</label><br>
+                <label>Apellidos Docente: ${param.apellidosEmpleado}</label><br>
                 <input type="hidden" name="ID_Calificacion" id="ID_Calificacion" value="${param.ID_Calificacion}" /><br><br>
                 <input type="submit" value="Eliminar" onclick="return confirm('¿Desea eliminar la calificacion?')" /><br><br>
             </div>
