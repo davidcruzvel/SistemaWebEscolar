@@ -116,8 +116,32 @@ from Estudiantes EST
     inner join Matriculas MAT on EST.NIE = MAT.NIE
     inner join VistaGrupos GRU on MAT.ID_Grupo = GRU.ID_Grupo;
 go
--- Vista de 
-
+-- Vista de Calificaciones
+create view VistaCalificaciones as
+select 
+	CAL.ID_Calificacion,
+	CAL.ID_Materia,
+	MAT.NombreMateria,
+	CAL.NIE,
+	EST.NombresEstudiante,
+	EST.ApellidosEstudiante,
+	CAL.Examen1,
+	CAL.Examen2,
+	CAL.Examen3,
+	CAL.ExamenFinal,
+	CAL.Tareas,
+	CAL.Promedio,
+	CAL.Estado,
+	CAL.ID_Docente,
+	EMP.NombresEmpleado,
+	EMP.ApellidosEmpleado
+from Calificaciones CAL
+	inner join Materias MAT on CAL.ID_Materia = MAT.ID_Materia
+	inner join Estudiantes EST on CAL.NIE = EST.NIE
+	inner join Docentes DOC on CAL.ID_Docente = DOC.ID_Docente
+	inner join Empleados EMP on DOC.ID_Empleado = EMP.ID_Empleado;
+go
+-- 
 
 
 -- Consulta que permite saber las vistas almacenadas
@@ -129,8 +153,5 @@ select * from VistaDireccionCompleta;
 select * from VistaEmpleados;
 select * from VistaDocentes;
 select * from VistaGrupos;
-select * from VistaEstudiantes where NIE='102365849';
-
-
-
-
+select * from VistaEstudiantes;
+select * from VistaCalificaciones;
