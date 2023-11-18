@@ -153,5 +153,6 @@ select * from VistaDireccionCompleta;
 select * from VistaEmpleados;
 select * from VistaDocentes;
 select * from VistaGrupos;
+select * from VistaEncargados;
 select * from VistaEstudiantes;
 select * from VistaCalificaciones;
